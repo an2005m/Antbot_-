@@ -1,0 +1,162 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ktds.AntBot.Studio.Workflow" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ktds.AntBot.Studio.Workflow_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:antbot="http://schemas.antbot.co.kr/AntBot/Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main Sequence" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ss:SecureString" Name="cert_Pwd" />
+      <Variable x:TypeArguments="x:Boolean" Name="certPage" />
+      <Variable x:TypeArguments="x:Int32" Name="certPageCnt" />
+      <Variable x:TypeArguments="x:Boolean" Name="자격증명Check" />
+    </Sequence.Variables>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_1" logLevel="DEBUG" logMsg="================인증서 로그인 시작=====================" />
+    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <antbot:CredentialGetSecureActivity Username="{x:Null}" CredentialType="Generic" DisplayName="자격증명 가져오기" sap2010:WorkflowViewState.IdRef="CredentialGetSecureActivity_1" Password="[cert_Pwd]" PersistanceType="Enterprise" ResultBool="[자격증명Check]" Target="RPA_Cert" />
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Boolean">[certPage]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[certPageCnt]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <antbot:IfThenCodeActivity Condition="[Not 자격증명Check]" DisplayName="If Then">
+      <ActivityAction>
+        <Throw Exception="[New Exception(&quot;RPA_Cert 자격 증명이 존재하지 않습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+      </ActivityAction>
+      <sap2010:WorkflowViewState.IdRef>IfThenCodeActivity_3</sap2010:WorkflowViewState.IdRef>
+    </antbot:IfThenCodeActivity>
+    <DoWhile sap2010:WorkflowViewState.IdRef="DoWhile_1" Condition="[( Not certPage ) And certPageCnt &lt;= 15]">
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" ContinueOnError="True" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;us-logo-img&quot; alt=&quot;한국전자인증 로고 이미지&quot; src=&quot;../CC_WSTD_home/unisignweb/rsrc/img/main_cert_logo.png&quot; tagname=&quot;img&quot; xpath=&quot;/html[1]/body[1]/div[2]/div[1]/div[1]/p[2]/img[1]&quot; /&gt;" ElementPosition="1155, 120" FindAttrName="" FindResult="[certPage]" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_1" ImageFileName="afRHuw5KIWMOGOUBWthw.png" OffsetX="-1" OffsetY="-1" ProcessName="chrome" Retry="3" WindowTitle="Insert title here" />
+        <antbot:IfThenCodeActivity Condition="[certPage = False]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_1">
+          <ActivityAction>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[certPageCnt]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[certPageCnt + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </antbot:IfThenCodeActivity>
+      </Sequence>
+    </DoWhile>
+    <antbot:IfThenCodeActivity Condition="[certPageCnt = 15]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_2">
+      <ActivityAction>
+        <Throw Exception="[New Exception(&quot;인증서 로그인화면 접속이 실패하였습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </ActivityAction>
+    </antbot:IfThenCodeActivity>
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DelayBefore="1000" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;us-pw-text&quot; name=&quot;us-pw&quot; tagname=&quot;input&quot; type=&quot;password&quot; data-enc=&quot;off&quot; e2e_type=&quot;11&quot; title=&quot;인증서 비밀번호를 입력하세요. (인증서 비밀번호는 대소문자를 구분합니다.)&quot; tabindex=&quot;1008&quot; classname=&quot;us-layout-pw-text&quot; xpath=&quot;/html[1]/body[1]/div[2]/div[1]/div[2]/div[3]/div[1]/form[1]/input[1]&quot; /&gt;" ElementPosition="827, 513" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_2" ImageFileName="OaCViaIsVF6XoaoBRbOR.png" OffsetX="223" OffsetY="19" ProcessName="chrome" Retry="3" WindowTitle="Insert title here" />
+    <antbot:SecurityKeyInCodeActivity DelayAfter="{x:Null}" MDelayMiliSec="{x:Null}" DelayBefore="1000" DirectInsert="True" DisplayName="키보드입력-보안문자열" sap2010:WorkflowViewState.IdRef="SecurityKeyInCodeActivity_1" IgnoreDefaultDelayForKeyIn="False" KeyInText="[cert_Pwd]" />
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DelayBefore="1000" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;us-confirm-btn&quot; tagname=&quot;input&quot; type=&quot;button&quot; value=&quot;확인&quot; tabindex=&quot;1009&quot; classname=&quot;us-normal-btn btn-confirm h35&quot; xpath=&quot;/html[1]/body[1]/div[2]/div[1]/div[2]/div[3]/div[2]/ul[1]/li[1]/input[1]&quot; /&gt;" ElementPosition="1231, 520" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_3" ImageFileName="UDCANjxgl353vlrifmlA.png" OffsetX="46" OffsetY="19" ProcessName="chrome" Retry="3" WindowTitle="Insert title here" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="================인증서 로그인 종료=====================" />
+    <sads:DebugSymbol.Symbol>d1BDOlxVc2Vyc1xVU0VSXERlc2t0b3Bc66y87J6Q7JeF66y0IOyekOuPme2ZlF/thYzsiqTtirhcUHJvY2Vzc1xDZXJ0TG9naW5TUk0ueGFtbDU7A3cOAgEBQgVCxwECAUFDBVUQAgEyVgVbIQIBLVwFbA8CARltBXEhAgEUcgVylQcCAQ5zBXORAgIBCnQFdLgGAgEEdQV1xwECAQJCkwFCxAECAUJEB0SQAgIBO0UHTBACATdNB1QQAgEzVipWOwIBMFgJWIABAgEuXERccQIBKl0HaxICARptKm0+AgEXbwlvfAIBFXL/BnKSBwIBE3LvBnLyBgIBEnKBAnL8BAIBEXLWAXLcAQIBEHLgBnLoBgIBD3OCAnOOAgIBDHNic2gCAQt0ogZ0tQYCAQl0kgZ0lQYCAQh0gQJ0nwQCAQd01gF03AECAQZ0gwZ0iwYCAQV1kwF1xAECAQNE7gFE+wECAT9EgwJEjQICAT5EuQFExQECATxKM0o4AgE6RzRHPgIBOFIxUjICATZPMk8/AgE0WBpYUwIBL14JXrgGAgEjXwlqJQIBG28ab08CARZeogZetQYCASlevwReywQCASdekgZelQYCASZemwJehwQCASVegwZeiwYCASRfLl9CAgEhYQ1oFgIBHGY3ZkgCAR9jOGNFAgEd</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogCodeActivity_1" sap:VirtualizedContainerService.HintSize="464,92" />
+      <sap2010:ViewStateData Id="CredentialGetSecureActivity_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="464,346">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="464,163" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_1" sap:VirtualizedContainerService.HintSize="301,187" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="301,201" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="323,552">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="464,712" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_2" sap:VirtualizedContainerService.HintSize="464,163" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_2" sap:VirtualizedContainerService.HintSize="464,180" />
+      <sap2010:ViewStateData Id="SecurityKeyInCodeActivity_1" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_3" sap:VirtualizedContainerService.HintSize="464,230" />
+      <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="464,92" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,2444">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="526,2564" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

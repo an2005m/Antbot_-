@@ -1,0 +1,177 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ktds.AntBot.Studio.Workflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:antbot="http://schemas.antbot.co.kr/AntBot/Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:moie="clr-namespace:Microsoft.Office.Interop.Excel;assembly=FileLib"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_conf" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="out_GetExcelPath" Type="InArgument(x:String)" />
+    <x:Property Name="out_OderNum" Type="InArgument(x:String)" />
+    <x:Property Name="out_자재코드" Type="InArgument(x:String)" />
+    <x:Property Name="out_StartBarcodeNum" Type="InArgument(x:String)" />
+    <x:Property Name="out_EndBarcodeNum" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ktds.AntBot.Studio.Workflow_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main Sequence" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="deskopPath" />
+      <Variable x:TypeArguments="x:String" Name="getOrderFile" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_작업" />
+    </Sequence.Variables>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_1" logLevel="DEBUG" logMsg="================엑셀파일 데이터 가져오기 시작==================" />
+    <Sequence DisplayName="환경설정" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[deskopPath]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[environment.GetFolderPath(environment.SpecialFolder.Desktop)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <antbot:GetLastModifiedCodeActivity DisplayName="최종수정 파일가져오기" FileName="[getOrderFile]" FileNamePattern="*.xls" sap2010:WorkflowViewState.IdRef="GetLastModifiedCodeActivity_1" InFolder="[deskopPath + &quot;\납품서등록(RPA)&quot;]" Relative="True" />
+      <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="[&quot;바탕화면 경로&gt;&gt;&gt;&quot; + deskopPath]" />
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[out_GetExcelPath]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[deskopPath + "\납품서등록(RPA)\" + getOrderFile]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_3" logLevel="DEBUG" logMsg="[&quot;구매오더매핑 파일명&gt;&gt;&gt;&quot; + getOrderFile]" />
+    <antbot:ExcelApplicationScope ExcelReadPasswd="{x:Null}" ExcelWritePasswd="{x:Null}" CreateWhenNotFound="False" DisplayName="엑셀 열기" ExcelFileName="[out_GetExcelPath]" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InVisible="False" ReadOnlyOpen="False" SaveOnExit="True">
+      <ActivityAction x:TypeArguments="moie:Workbook">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="moie:Workbook" Name="OpenWorkBook" />
+        </ActivityAction.Argument>
+        <antbot:ExcelReadCodeActivity ReadColumnCnt="{x:Null}" ReadRowCnt="{x:Null}" StartColumn="{x:Null}" StartRow="{x:Null}" CellName="B:F" DisplayName="엑셀 읽기-영역" sap2010:WorkflowViewState.IdRef="ExcelReadCodeActivity_1" IncludeHeader="True" OutputDataTable="[dt_작업]" SheetName="Sheet0" />
+      </ActivityAction>
+    </antbot:ExcelApplicationScope>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_4" logLevel="DEBUG" logMsg="[&quot;전체 바코드 갯수 : &quot; + dt_작업.Rows.Count.ToString]" />
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_OderNum]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("구매오더번호").tostring]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_자재코드]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("자재코드").tostring]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_StartBarcodeNum]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("바코드번호").tostring]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_EndBarcodeNum]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[dt_작업.Rows(dt_작업.Rows.Count-1)("바코드번호").tostring]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_5" logLevel="DEBUG" logMsg="================엑셀파일 데이터 가져오기 종료==================" />
+    <sads:DebugSymbol.Symbol>d2NDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc66y87J6Q7JeF66y0X+yekOuPme2ZlFxQcm9jZXNzXOuCqe2SiOyEnOuTseuhnVxHZXRFeGNlbEZpbGVEYXRhLnhhbWwoSAOPAQ4CAQFOBU7KAQIBNU8FYhACASFjBWPLAQIBHmQFayQCARZsBWzOAQIBFG0FdA4CARB1BXwOAgEMfQWEAQ4CAQiFAQWMAQ4CAQSNAQWNAcoBAgECTpMBTscBAgE2UAdXEAIBMVgHWPsBAgErWQdZyAECAShaB2EQAgEiY5MBY8gBAgEfZJcBZKsBAgEcaQlppQICARdskwFsywECARVyMHJSAgETbzFvPgIBEXowelACAQ93MXc7AgENggEwggFRAgELfzF/RgIBCYoBMIoBYgIBB4cBMYcBRAIBBY0BkwGNAccBAgEDVTJVcAIBNFIzUj8CATJYwAFY6AECAS9YTlheAgEtWG9YdgIBLFmVAVnFAQIBKV8yX14CASVcM1xFAgEjaYYCaY8CAgEaaZoCaaICAgEZaYoBaY8BAgEY</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogCodeActivity_1" sap:VirtualizedContainerService.HintSize="325,92" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="GetLastModifiedCodeActivity_1" sap:VirtualizedContainerService.HintSize="273,22" />
+      <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="273,92" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="325,478">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogCodeActivity_3" sap:VirtualizedContainerService.HintSize="325,92" />
+      <sap2010:ViewStateData Id="ExcelReadCodeActivity_1" sap:VirtualizedContainerService.HintSize="287,89" />
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="325,195" />
+      <sap2010:ViewStateData Id="LogCodeActivity_4" sap:VirtualizedContainerService.HintSize="325,92" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="325,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="325,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="325,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="325,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_5" sap:VirtualizedContainerService.HintSize="325,92" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="347,1765">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="387,1845" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

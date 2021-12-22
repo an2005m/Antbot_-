@@ -1,0 +1,488 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ktds.AntBot.Studio.TemplateWorkflow.Workflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:antbot="http://schemas.antbot.co.kr/AntBot/Activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:os="clr-namespace:OpenQA.Selenium;assembly=WebDriver"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="str_작업시트목록" Type="InArgument(s:String[])" />
+    <x:Property Name="str_보내기여부" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ktds.AntBot.Studio.TemplateWorkflow.Flowchart_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>ktds.AntBot.Common.Finder</x:String>
+      <x:String>OpenQA.Selenium</x:String>
+      <x:String>System.Security</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>CommonLib</AssemblyReference>
+      <AssemblyReference>WebDriver</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Main Flowchart" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+        <Sequence DisplayName="Sequence - 사이트 열고 팝업 제거" sap2010:WorkflowViewState.IdRef="Sequence_1">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="ERPURL" />
+            <Variable x:TypeArguments="x:String" Name="Handle" />
+            <Variable x:TypeArguments="s:String[]" Name="브라우져창목록" />
+            <Variable x:TypeArguments="x:Boolean" Name="Bool_로그인" />
+          </Sequence.Variables>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[ERPURL]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_Config("ERPURL").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <antbot:FinderOpenBrowserActivity Timeout="{x:Null}" BrowserType="Chrome" ContinueOnError="No" DisplayName="브라우져 열기" sap2010:WorkflowViewState.IdRef="FinderOpenBrowserActivity_1" URL="[ERPURL]" UnhandledPromptBehavior="Ignore" WindowState="Maxmize" />
+          <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="브라우져 열기" />
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Handle]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[ktds.AntBot.Common.Finder.CommonMethods.Instance.WebDriver.CurrentWindowHandle]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_3" logLevel="DEBUG" logMsg="[Handle]" />
+          <antbot:SmartFinderActivity DisplayName="Smart Finder" sap2010:WorkflowViewState.IdRef="SmartFinderActivity_3">
+            <antbot:WaitForFoundActionActivity ContinueOnError="True" DelayAfter="0" DelayBefore="0" DisplayName="Smart Finder" Focus="False" sap2010:WorkflowViewState.IdRef="WaitForFoundActionActivity_4" ImageBound="0, 0, 1920, 937" ImageFileName="C:\Users\user\Documents\AntBot\신품화 Workflow\imagesave\4b30939287af4ddb8633176690ea466d.png" IsSuccess="[Bool_로그인]" StoreText="{}{&quot;Version&quot;:&quot;1.0&quot;,&quot;UiaScreen&quot;:{&quot;Controls&quot;:[{&quot;AutomationProtocol&quot;:&quot;uia3&quot;,&quot;TypeName&quot;:&quot;Document&quot;,&quot;Name&quot;:&quot;Document 'Chrome Legacy Window'&quot;,&quot;Tag&quot;:&quot;Document&quot;,&quot;ScreenShotContentRect&quot;:&quot;0, 0, 1920, 937&quot;,&quot;Patterns&quot;:[&quot;Text&quot;],&quot;Selectors&quot;:[{&quot;Ignore&quot;:false,&quot;Order&quot;:0,&quot;IsWindowsInstance&quot;:false,&quot;IsCustom&quot;:false,&quot;Elements&quot;:[{&quot;Ignore&quot;:false,&quot;Name&quot;:&quot;Document 'Chrome Legacy Window'&quot;,&quot;Tag&quot;:&quot;Document&quot;,&quot;Combinator&quot;:&quot;&gt;&quot;,&quot;Attributes&quot;:[{&quot;Ignore&quot;:false,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Class&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;Chrome_RenderWidgetHostHWND&quot;},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Enabled&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:true},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Id&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;13202656&quot;},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Name&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;Chrome Legacy Window&quot;},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:true,&quot;Name&quot;:&quot;Ordinal&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:-1},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Visible&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:true}]}]}],&quot;SelectorCount&quot;:1}],&quot;TypeName&quot;:&quot;Pane&quot;,&quot;Name&quot;:&quot;Pane 'KT ERP Barcode System Login - Chrome'&quot;,&quot;Tag&quot;:&quot;Pane&quot;,&quot;ScreenShotContentRect&quot;:&quot;8, 8, 1920, 1048&quot;,&quot;Patterns&quot;:[&quot;Transform&quot;,&quot;Window&quot;],&quot;Selectors&quot;:[{&quot;Ignore&quot;:false,&quot;Order&quot;:0,&quot;IsWindowsInstance&quot;:false,&quot;IsCustom&quot;:false,&quot;Elements&quot;:[{&quot;Ignore&quot;:false,&quot;Name&quot;:&quot;Pane 'KT ERP Barcode System Login - Chrome'&quot;,&quot;Tag&quot;:&quot;Pane&quot;,&quot;Combinator&quot;:&quot;&gt;&quot;,&quot;Attributes&quot;:[{&quot;Ignore&quot;:false,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Class&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;Chrome_WidgetWin_1&quot;},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Enabled&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:true},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Id&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;&quot;},{&quot;Ignore&quot;:false,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Name&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;KT ERP Barcode System Login - Chrome&quot;},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:true,&quot;Name&quot;:&quot;Ordinal&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:-1},{&quot;Ignore&quot;:false,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Process&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:&quot;chrome&quot;},{&quot;Ignore&quot;:true,&quot;IsOrdinal&quot;:false,&quot;Name&quot;:&quot;Visible&quot;,&quot;Operation&quot;:&quot;EqualTo&quot;,&quot;Value&quot;:true}]}]}],&quot;SelectorCount&quot;:1}}" Timeout="5000">
+              <antbot:WaitForFoundActionActivity.ActionPatterns>
+                <scg:List x:TypeArguments="x:String" Capacity="1">
+                  <x:String>Text</x:String>
+                </scg:List>
+              </antbot:WaitForFoundActionActivity.ActionPatterns>
+            </antbot:WaitForFoundActionActivity>
+          </antbot:SmartFinderActivity>
+          <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_95" logLevel="DEBUG" logMsg="[Bool_로그인.ToString]" />
+          <antbot:IfThenCodeActivity Condition="[Bool_로그인.Equals(False)]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_30">
+            <ActivityAction>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_68">
+                <antbot:FinderSeleniumInjectJSActivity AsyncInvokeTimeouts="{x:Null}" InputParameter="{x:Null}" ScriptOutput="{x:Null}" ContinueOnError="No" DisplayName="Inject Javascript - 로그아웃 클릭" sap2010:WorkflowViewState.IdRef="FinderSeleniumInjectJSActivity_24" IsAsyncInvoke="False" ScriptCode="document.querySelector(&quot;#gnb &gt; ul &gt; li.gnb_01 &gt; a&quot;).click();" />
+                <Delay DisplayName="Delay - 00:00:02" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_17" />
+              </Sequence>
+            </ActivityAction>
+          </antbot:IfThenCodeActivity>
+          <antbot:FinderSeleniumGetWindowsActivity DisplayName="브라우져 창 목록" sap2010:WorkflowViewState.IdRef="FinderSeleniumGetWindowsActivity_1" WindowHandles="[브라우져창목록]" />
+          <antbot:ForEachGenericCodeActivity x:TypeArguments="x:String" DisplayName="ForEach - 창닫기" sap2010:WorkflowViewState.IdRef="ForEachGenericCodeActivity`1_1" Values="[브라우져창목록]">
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+              </ActivityAction.Argument>
+              <antbot:IfThenCodeActivity Condition="[Not item.Equals(Handle)]" DisplayName="If Then " sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_1">
+                <ActivityAction>
+                  <antbot:FinderSeleniumCloseBrowserActivity ResultBool="{x:Null}" BrowserTitle="[item]" BrowserTitleDiffCase="True" BrowserTitleType="전부_일치" ContinueOnError="No" DisplayName="브라우져(탭) 닫기" sap2010:WorkflowViewState.IdRef="FinderSeleniumCloseBrowserActivity_1" IsCloseCurrentWindow="False" SwitchWindowType="WindowHandle" />
+                </ActivityAction>
+              </antbot:IfThenCodeActivity>
+            </ActivityAction>
+          </antbot:ForEachGenericCodeActivity>
+          <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_4" logLevel="DEBUG" logMsg="팝업 닫기 완료" />
+        </Sequence>
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+            <Sequence DisplayName="Sequence - 로그인" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="Alert" />
+                <Variable x:TypeArguments="x:Boolean" Name="Bool_로그인" />
+                <Variable x:TypeArguments="x:String" Name="아이디" />
+                <Variable x:TypeArguments="ss:SecureString" Name="패스워드" />
+              </Sequence.Variables>
+              <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_5" logLevel="DEBUG" logMsg="로그인 시작" />
+              <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 아이디,비밀번호 가져오기" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_1" WorkflowPath="Process\자격증명가져오기.xaml">
+                <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_계정">[in_Config("신품화계정").ToString]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="Out_UserName">[아이디]</OutArgument>
+                  <OutArgument x:TypeArguments="ss:SecureString" x:Key="Out_UserPW">[패스워드]</OutArgument>
+                </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+              </antbot:ExecuteXamlWorkflowCodeActivity>
+              <Delay DisplayName="Delay - 00:00:03" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_1" />
+              <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonDblClick" ActivityActionType="찾기" DisplayName="Finder - 아이디 입력창 클릭" ElementAttrXml="&lt;Self tagname=&quot;input&quot; size=&quot;24&quot; onclick=&quot;clearId()&quot; xpath=&quot;/html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/input[1]&quot; /&gt;" ElementPosition="861, 369" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_1" ImageFileName="QgKjy8uYTcfPewSSiJ7m.png" OffsetX="79" OffsetY="11" ProcessName="chrome" Retry="3" WindowTitle="KT ERP Barcode System Login" />
+              <antbot:KeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DirectInsert="True" DisplayName="키보드입력 - 아이디 입력" sap2010:WorkflowViewState.IdRef="KeyInActivity_1" IgnoreDefaultDelayForKeyIn="False" KeyInText="[아이디]" />
+              <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_1" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="False" isShiftKey="False" isSpecialKey="True" isWinKey="False" spKey="TAB" />
+              <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_2" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="False" isShiftKey="False" isSpecialKey="True" isWinKey="False" spKey="TAB" />
+              <antbot:SecurityKeyInCodeActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DirectInsert="True" DisplayName="키보드입력-보안문자열" sap2010:WorkflowViewState.IdRef="SecurityKeyInCodeActivity_1" IgnoreDefaultDelayForKeyIn="False" KeyInText="[패스워드]" />
+              <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_3" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="False" isShiftKey="False" isSpecialKey="True" isWinKey="False" spKey="ENTER" />
+              <Delay DisplayName="Delay - 00:00:03" Duration="00:00:03" sap2010:WorkflowViewState.IdRef="Delay_2" />
+              <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                <TryCatch.Try>
+                  <Sequence DisplayName="Sequence - 인증번호 확인" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Alert]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_6" logLevel="DEBUG" logMsg="[&quot;1Alert : &quot; + Alert]" />
+                    <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                      <TryCatch.Try>
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Alert]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[ktds.AntBot.Common.Finder.CommonMethods.Instance.WebDriver.SwitchTo.Alert.Text]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[Alert]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_7" logLevel="DEBUG" logMsg="[&quot;2Alert : &quot; + Alert]" />
+                    <antbot:IfThenCodeActivity Condition="[Alert &lt;&gt; &quot;&quot;]" DisplayName="If Then - 팝업이 뜬 경우" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_3">
+                      <ActivityAction>
+                        <Sequence DisplayName="If Then SEQ" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                          <antbot:IfThenCodeActivity Condition="[Alert.Contains(&quot;비밀번호&quot;) or Alert.Contains(&quot;아이디&quot;)]" DisplayName="If Then - 아이디 혹은 비밀번호 틀릴시" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_2">
+                            <ActivityAction>
+                              <Throw Exception="[new Exception(&quot;아이디 또는 비밀번호가 잘못입력됐습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                            </ActivityAction>
+                          </antbot:IfThenCodeActivity>
+                          <InvokeMethod DisplayName="InvokeMethod - 추가확인버튼(실제는 필요없음)" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Accept">
+                            <InvokeMethod.TargetObject>
+                              <InArgument x:TypeArguments="os:IAlert">[ktds.AntBot.Common.Finder.CommonMethods.Instance.WebDriver.SwitchTo.Alert]</InArgument>
+                            </InvokeMethod.TargetObject>
+                          </InvokeMethod>
+                          <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder - 인증번호 칸 클릭" ElementAttrXml="&lt;Self id=&quot;userInputCertificationNumber&quot; type=&quot;text&quot; tagname=&quot;input&quot; size=&quot;24&quot; autocomplete=&quot;off&quot; disabled=&quot;true&quot; onkeydown=&quot;keyDown(event,this.id)&quot; classname=&quot;input&quot; xpath=&quot;/html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[5]/td[1]/input[1]&quot; /&gt;" ElementPosition="877, 424" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_2" ImageFileName="2U4m86uoc0FJ7mvrLSKR.png" OffsetX="79" OffsetY="11" ProcessName="chrome" Retry="3" WindowTitle="KT ERP Barcode System Login" />
+                          <antbot:InputWindowCodeActivity OutResult="{x:Null}" DisplayName="사용자 입력창 - 인증번호 입력" sap2010:WorkflowViewState.IdRef="InputWindowCodeActivity_1" MainText="인증번호를 입력해주세요" Title="인증번호를 입력해주세요." />
+                          <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self src=&quot;resources/images/btn_otp_conf_2.gif &quot; alt=&quot;인증번호 확인&quot; name=&quot;make_confirm_no&quot; id=&quot;make_confirm_no&quot; tagname=&quot;img&quot; xpath=&quot;/html[1]/body[1]/table[1]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[7]/td[1]/a[2]/img[1]&quot; /&gt;" ElementPosition="1013, 452" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_10" ImageFileName="RirUhC9bIPoVSa4nS6Gi.png" OffsetX="47" OffsetY="13" ProcessName="chrome" Retry="3" WindowTitle="KT ERP Barcode System Login" />
+                        </Sequence>
+                      </ActivityAction>
+                    </antbot:IfThenCodeActivity>
+                  </Sequence>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                      </ActivityAction.Argument>
+                      <Throw Exception="[New Exception(exception.Message)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+              <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_8" logLevel="DEBUG" logMsg="로그인 완료" />
+            </Sequence>
+            <FlowStep.Next>
+              <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                <Sequence DisplayName="Sequence - 메뉴접속" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="str_수리업체" />
+                    <Variable x:TypeArguments="x:String" Name="str_MR센터" />
+                  </Sequence.Variables>
+                  <Delay DisplayName="Delay - 00:00:03" Duration="00:00:03" sap2010:WorkflowViewState.IdRef="Delay_19" />
+                  <antbot:FinderSeleniumInjectJSActivity AsyncInvokeTimeouts="{x:Null}" InputParameter="{x:Null}" ScriptOutput="{x:Null}" ContinueOnError="Yes" DisplayName="Inject Javascript - 공지창" sap2010:WorkflowViewState.IdRef="FinderSeleniumInjectJSActivity_25" IsAsyncInvoke="False" ScriptCode="var item = document.getElementsByClassName('w2floatingLayer');&#xA;var count = item.length;&#xA;&#xA;if (count &gt; 0) {&#xA; for (var i = count-1; i &gt;= 0; i--) {&#xA;  item[i].querySelector('.w2floatingLayer_close_button').click();&#xA; }&#xA;}" />
+                  <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_9" logLevel="DEBUG" logMsg="메뉴 이동 시작" />
+                  <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder - MR센터관리 클릭" ElementAttrXml="&lt;Self href=&quot;javascript:toggleExpanded('/MR_CENT', '2', '');&quot; tagname=&quot;a&quot; parentid=&quot;MR_CENT&quot; /&gt;" ElementPosition="119, 265" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_3" ImageFileName="mw1o0d9vDJmWy37g8EmE.png" OffsetX="91" OffsetY="21" ProcessName="chrome" Retry="3" WindowTitle="KT ERP Barcode System" />
+                  <Delay DisplayName="Delay - 00:00:02" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                  <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder - 수리사수리품배송 클릭" ElementAttrXml="&lt;Self href=&quot;javascript:toggleExpanded('/MR_CENT/REPAIR_DLVR', '3','/nbase/websquare/init.do?w2xPath=/views/distributionCenter/repairDelivery.xml');&quot; onfocus=&quot;this.blur()&quot; innertext=&quot;수리사수리품배송&quot; tagname=&quot;a&quot; parentid=&quot;_/MR_CENT/REPAIR_DLVR&quot;/&gt;" ElementPosition="153, 368" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_4" ImageFileName="LzrAlV90wsnrLG2GGLn7.png" OffsetX="91" OffsetY="21" ProcessName="chrome" Retry="3" WindowTitle="KT ERP Barcode System" />
+                  <Delay DisplayName="Delay - 00:00:02" Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_4" />
+                  <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_10" logLevel="DEBUG" logMsg="메뉴 이동 완료" />
+                </Sequence>
+                <FlowStep.Next>
+                  <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+                    <Sequence DisplayName="sequence - 오류항목 추가 " sap2010:WorkflowViewState.IdRef="Sequence_29">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="sd:DataTable" Name="증상목록" />
+                        <Variable x:TypeArguments="x:String" Name="str_바코드번호" />
+                        <Variable x:TypeArguments="x:String" Name="str_증상코드" />
+                        <Variable x:TypeArguments="x:String" Name="str_수리코드" />
+                        <Variable x:TypeArguments="x:String" Name="str_수리업체" />
+                        <Variable x:TypeArguments="x:String" Name="str_MR센터" />
+                        <Variable x:TypeArguments="x:Int32" Name="int_시트count" />
+                        <Variable x:TypeArguments="x:Int32" Name="Int_index" />
+                        <Variable x:TypeArguments="sd:DataRow" Name="시트명row" />
+                        <Variable x:TypeArguments="x:String" Name="시트명" />
+                        <Variable x:TypeArguments="x:Int32" Name="완료마지막행" />
+                        <Variable x:TypeArguments="x:Int32" Name="count" />
+                        <Variable x:TypeArguments="x:Int32" Name="rowLast" />
+                        <Variable x:TypeArguments="sd:DataTable" Name="dt_수도권2" />
+                        <Variable x:TypeArguments="sd:DataTable" Name="dt_바코드1" />
+                        <Variable x:TypeArguments="x:String" Name="엑셀수식" />
+                        <Variable x:TypeArguments="x:String" Name="신품화폴더" />
+                        <Variable x:TypeArguments="s:String[]" Name="Arr_파일목록" />
+                      </Sequence.Variables>
+                      <antbot:CommentOut DisplayName="Ignored Activities">
+                        <Sequence DisplayName="Ignored Activities">
+                          <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_2" WorkflowPath="Process\신품화출고작업.xaml">
+                            <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                              <InArgument x:TypeArguments="s:String[]" x:Key="str_작업시트목록">[str_작업시트목록]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="str_보내기여부">[str_보내기여부]</InArgument>
+                            </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                          </antbot:ExecuteXamlWorkflowCodeActivity>
+                        </Sequence>
+                        <sap2010:WorkflowViewState.IdRef>CommentOut_1</sap2010:WorkflowViewState.IdRef>
+                      </antbot:CommentOut>
+                    </Sequence>
+                  </FlowStep>
+                </FlowStep.Next>
+              </FlowStep>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
+    <sads:DebugSymbol.Symbol>d1xDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc7Iug7ZKI7ZmUIFdvcmtmbG93KOyCreygnOuyhOyghClcUHJvY2Vzc1zsi6DtkojtmZTsnpHsl4UueGFtbIMBTAO0Ag8CAQFPCYkBFAIBaowBDfIBGAIBG/UBEYICHAIBBIUCFaYCIAIBAlYLXRQDAZkBXgtehgIDAZYBXwtfpQEDAZQBYAtnFAMBkAFoC2imAQMBjQFpC3EoAwGFAXILcrIBAwGCAXMLeicCAXp7C3utAQIBd3wLhwEvAgFtiAELiAGmAQIBa5MBD5MBqAECAWiUAQ+aATgCAWCbAQ+bAXUCAV6cAQ+cAasGAgFZnQEPnQGFAgIBVp4BD54BzwICAVWfAQ+fAc8CAgFUoAEPoAGbAgIBUaEBD6EB0QICAVCiAQ+iAXUCAU6jAQ/wARoCAR7xAQ/xAagBAgEc+gET+gF6AgEZ+wET+wGpBAIBF/wBE/wBrgECARX9ARP9AccFAgEQ/gET/gF5AgEO/wET/wHtBgIBCYACE4ACeQIBB4ECE4ECrwECAQWaAhelAisCAQNbNltUAwGcAVg3WD8DAZoBXsIBXswBAwGXAV+ZAV+iAQMBlQFlNmWGAQMBkwFiN2I/AwGRAWiZAWijAQMBjgFqDXAxAwGGAXKaAXKvAQMBgwFzMHNKAwGAAXUPeBoCAXt7nwF7qgECAXh8rQF8uAECAXWBAQ+FASsCAW6IAZkBiAGjAQIBbJMBnQGTAaUBAgFplAG0AZQBywECAWeYAVWYAVsCAWWXAVCXAVUCAWOWAUiWAWUCAWGbAT6bAUgCAV+cAYsGnAGoBgIBXZwB+wWcAf4FAgFcnAGnApwBiQQCAVucAewFnAH0BQIBWp0B+wGdAYICAgFXoAGQAqABmAICAVKiAT6iAUgCAU+lARPkAR4CASHsARfsAXkCAR/xAZ0B8QGlAQIBHfoBQvoBTAIBGvsBrAL7AaYEAgEY/AGhAfwBqwECARb9Aa0F/QHEBQIBFP0BnQX9AaAFAgET/QGnAv0BqwMCARL9AY4F/QGWBQIBEf4BQv4BTAIBD/8B0wb/AeoGAgEN/wHDBv8BxgYCAQz/AakC/wHRBAIBC/8BtAb/AbwGAgEKgAJCgAJMAgEIgQKiAYECrAECAQZqUmpVAwGMAWrgAmrsAgMBigFqgh9qiB8DAYkBavcCavkeAwGIAWpiamUDAYcBdhF2gQMCAX53EXd4AgF8gQE0gQFPAgFygwETgwHTAgIBb6YBFa8BHgIBSrABFbABxwECAUexARXPASACAT7QARXQAccBAgE70QEV4wExAgEi7AEo7AFMAgEgdq0Cdv4CAgF/d0B3SgIBfYMBYYMBaQIBcKwBG6wBSgIBTagBQagBSAIBS7ABowGwAcQBAgFIswEZugEiAgFDwgEdywEmAgE/0AGjAdABxAECATzRATrRAVkCATnTARnhASQCASO4AUS4AZQBAgFGtQFFtQFMAgFEyAEjyAFSAgFCxAFJxAFQAgFA1AEb2AE3AgEz2QEb3QEqAgEx3gEb3gHXBwIBLN8BG98B3AECASngARvgAYUHAgEk1AFA1AGHAQIBNtYBH9YBkgECATTbAUfbAZIBAgEy3gG3B94B1AcCATDeAacH3gGqBwIBL94BrwLeAbUFAgEu3gGYB94BoAcCAS3fAcoB3wHZAQIBK98BtQHfAcMBAgEq4AHlBuABggcCASjgAdUG4AHYBgIBJ+ABowLgAeEEAgEm4AHGBuABzgYCASXWATDWAWUCATU=</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="300,60" />
+      <sap2010:ViewStateData Id="FinderOpenBrowserActivity_1" sap:VirtualizedContainerService.HintSize="300,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="300,92" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="300,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_3" sap:VirtualizedContainerService.HintSize="300,92" />
+      <sap2010:ViewStateData Id="WaitForFoundActionActivity_4" sap:VirtualizedContainerService.HintSize="200,36" />
+      <sap2010:ViewStateData Id="SmartFinderActivity_3" sap:VirtualizedContainerService.HintSize="300,226" />
+      <sap2010:ViewStateData Id="LogCodeActivity_95" sap:VirtualizedContainerService.HintSize="300,92" />
+      <sap2010:ViewStateData Id="FinderSeleniumInjectJSActivity_24" sap:VirtualizedContainerService.HintSize="262,61" />
+      <sap2010:ViewStateData Id="Delay_17" sap:VirtualizedContainerService.HintSize="262,22" />
+      <sap2010:ViewStateData Id="Sequence_68" sap:VirtualizedContainerService.HintSize="284,247">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="IfThenCodeActivity_30" sap:VirtualizedContainerService.HintSize="300,388" />
+      <sap2010:ViewStateData Id="FinderSeleniumGetWindowsActivity_1" sap:VirtualizedContainerService.HintSize="300,22" />
+      <sap2010:ViewStateData Id="FinderSeleniumCloseBrowserActivity_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="266,163" />
+      <sap2010:ViewStateData Id="ForEachGenericCodeActivity`1_1" sap:VirtualizedContainerService.HintSize="300,269" />
+      <sap2010:ViewStateData Id="LogCodeActivity_4" sap:VirtualizedContainerService.HintSize="300,92" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogCodeActivity_5" sap:VirtualizedContainerService.HintSize="458,92" />
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_1" sap:VirtualizedContainerService.HintSize="458,89" />
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="458,22" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_1" sap:VirtualizedContainerService.HintSize="458,180" />
+      <sap2010:ViewStateData Id="KeyInActivity_1" sap:VirtualizedContainerService.HintSize="458,60" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_1" sap:VirtualizedContainerService.HintSize="458,109" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_2" sap:VirtualizedContainerService.HintSize="458,109" />
+      <sap2010:ViewStateData Id="SecurityKeyInCodeActivity_1" sap:VirtualizedContainerService.HintSize="458,22" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_3" sap:VirtualizedContainerService.HintSize="458,109" />
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="458,22" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="418,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_6" sap:VirtualizedContainerService.HintSize="418,92" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="404,20">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="418,282" />
+      <sap2010:ViewStateData Id="LogCodeActivity_7" sap:VirtualizedContainerService.HintSize="418,92" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_2" sap:VirtualizedContainerService.HintSize="339,163" />
+      <sap2010:ViewStateData Id="InvokeMethod_1" sap:VirtualizedContainerService.HintSize="339,127" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_2" sap:VirtualizedContainerService.HintSize="339,180" />
+      <sap2010:ViewStateData Id="InputWindowCodeActivity_1" sap:VirtualizedContainerService.HintSize="339,89" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_10" sap:VirtualizedContainerService.HintSize="339,198" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="361,1041">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="418,1182" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="440,1992">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="444,20">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="458,2214" />
+      <sap2010:ViewStateData Id="LogCodeActivity_8" sap:VirtualizedContainerService.HintSize="458,92" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="480,3684">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_19" sap:VirtualizedContainerService.HintSize="301,22" />
+      <sap2010:ViewStateData Id="FinderSeleniumInjectJSActivity_25" sap:VirtualizedContainerService.HintSize="301,61" />
+      <sap2010:ViewStateData Id="LogCodeActivity_9" sap:VirtualizedContainerService.HintSize="301,92" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_3" sap:VirtualizedContainerService.HintSize="301,186" />
+      <sap2010:ViewStateData Id="Delay_3" sap:VirtualizedContainerService.HintSize="301,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FinderAutoActivity_4" sap:VirtualizedContainerService.HintSize="301,180" />
+      <sap2010:ViewStateData Id="Delay_4" sap:VirtualizedContainerService.HintSize="301,22" />
+      <sap2010:ViewStateData Id="LogCodeActivity_10" sap:VirtualizedContainerService.HintSize="301,92" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_2" sap:VirtualizedContainerService.HintSize="314,89" />
+      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="200,50" />
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="200,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,345</av:Point>
+            <av:Size x:Key="ShapeSize">200,50</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,255</av:Point>
+            <av:Size x:Key="ShapeSize">200,50</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,305 300,345</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,185</av:Point>
+            <av:Size x:Key="ShapeSize">200,50</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,235 300,255</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,115</av:Point>
+            <av:Size x:Key="ShapeSize">200,50</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,165 300,185</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,636">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,115</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.TemplateWorkflow.Flowchart_1" sap:VirtualizedContainerService.HintSize="654,716" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

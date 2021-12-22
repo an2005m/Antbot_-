@@ -1,0 +1,184 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ktds.AntBot.Studio.Workflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:antbot="http://schemas.antbot.co.kr/AntBot/Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_OderNum" Type="InArgument(x:String)" />
+    <x:Property Name="in_자재코드" Type="InArgument(x:String)" />
+    <x:Property Name="in_DicSuccess" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_DicFail" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ktds.AntBot.Studio.Workflow_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main Sequence" sap2010:WorkflowViewState.IdRef="Sequence_8">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="OderNum" />
+      <Variable x:TypeArguments="x:String" Name="자재코드" />
+      <Variable x:TypeArguments="x:String" Name="messageTitle" />
+      <Variable x:TypeArguments="x:String" Name="successMessage" />
+      <Variable x:TypeArguments="x:String" Name="failMessage" />
+      <Variable x:TypeArguments="x:String" Name="messageContent" />
+    </Sequence.Variables>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_1" logLevel="DEBUG" logMsg="=================OutputPopup 시작=================" />
+    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[messageTitle]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">납품서등록업무 RPA수행 결과</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[OderNum]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_OderNum]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[자재코드]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_자재코드]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <antbot:ForEachGenericCodeActivity x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" DisplayName="ForEach" sap2010:WorkflowViewState.IdRef="ForEachGenericCodeActivity`1_5" Values="[in_DicSuccess]">
+      <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="item" />
+        </ActivityAction.Argument>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[successMessage]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[successMessage + "항번 : " + item.Key.ToString + " | 바코드매핑수량 : " + item.Value.ToString + vbNewLine]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </ActivityAction>
+    </antbot:ForEachGenericCodeActivity>
+    <antbot:ForEachGenericCodeActivity x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" DisplayName="ForEach" sap2010:WorkflowViewState.IdRef="ForEachGenericCodeActivity`1_6" Values="[in_DicFail]">
+      <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="item" />
+        </ActivityAction.Argument>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[failMessage]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[failMessage + "항번 : " + item.Key.ToString + " | 사유 : " + item.Value.ToString + vbNewLine]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </ActivityAction>
+    </antbot:ForEachGenericCodeActivity>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[messageContent]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["=================================" + vbNewLine + 
+"처리 오더번호 : " + in_OderNum + vbNewLine +
+"처리 자재코드 : " + in_자재코드 + vbNewLine + 
+"=================================" + vbNewLine +
+"ㅡ&lt; 성공 &gt;ㅡ" + vbNewLine +
+successMessage + vbNewLine +
+"ㅡ&lt; 미처리 &gt;ㅡ" + vbNewLine +
+failMessage]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_3" logLevel="DEBUG" logMsg="[messageContent]" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="=================OutputPopup 종료=================" />
+    <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_1" MsgBoxButton="Ok" MsgBoxContent="[messageContent]" MsgBoxIcon="Confirm" MsgBoxTitle="[messageTitle]" />
+    <sads:DebugSymbol.Symbol>d15DOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc66y87J6Q7JeF66y0X+yekOuPme2ZlFxQcm9jZXNzXOuCqe2SiOyEnOuTseuhnVxPdXRwdXRQb3B1cC54YW1sIEMDmAEOAgEBTAVMyAECAS1NBWYQAgEeZwV1KQIBF3YFhAEpAgEQhQEFkwEOAgEMlAEFlAGoAQIBCZUBBZUByAECAQeWAQWWAfUBAgECTJMBTMUBAgEuTgdVEAIBKVYHXRACASReB2UQAgEfZ70BZ84BAgEcbAlzEgIBGHa9AXbLAQIBFXsJggESAgERhwExhwFBAgENlAGTAZQBpQECAQqVAZMBlQHFAQIBCJYB4gGWAfIBAgEFlgGuAZYBwAECAQNTMlNCAgEsUDNQQQIBKlsyWz4CASdYM1g8AgElYzJjOwIBImAzYDkCASBxNHGWAQIBG241bkUCARmAATSAAY4BAgEUfTV9QgIBEg==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogCodeActivity_1" sap:VirtualizedContainerService.HintSize="323,92" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="323,384">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="ForEachGenericCodeActivity`1_5" sap:VirtualizedContainerService.HintSize="323,186" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="ForEachGenericCodeActivity`1_6" sap:VirtualizedContainerService.HintSize="323,186" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="323,62" />
+      <sap2010:ViewStateData Id="LogCodeActivity_3" sap:VirtualizedContainerService.HintSize="323,92" />
+      <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="323,92" />
+      <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_1" sap:VirtualizedContainerService.HintSize="323,60" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="345,1558">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="385,1638" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

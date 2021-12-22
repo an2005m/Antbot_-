@@ -1,0 +1,371 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ktds.AntBot.Studio.Workflow"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:antbot="http://schemas.antbot.co.kr/AntBot/Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_conf" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="out_Lst오더번호" Type="OutArgument(scg:List(x:String))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ktds.AntBot.Studio.Workflow_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>OpenQA.Selenium</x:String>
+      <x:String>ktds.AntBot.Common.Finder</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>WebDriver</AssemblyReference>
+      <AssemblyReference>Selenium.WebDriver.Equip</AssemblyReference>
+      <AssemblyReference>CommonLib</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main Sequence" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="isSRM_Page" />
+      <Variable x:TypeArguments="x:Int32" Name="isSRM_PageCnt" />
+      <Variable x:TypeArguments="x:Int32" Name="isNext_PageCnt" />
+      <Variable x:TypeArguments="x:Boolean" Name="isNext_Page" />
+      <Variable x:TypeArguments="x:String" Name="isNoData" />
+      <Variable x:TypeArguments="x:String" Name="inOderNum" />
+      <Variable x:TypeArguments="x:String" Name="requestStartDate" />
+      <Variable x:TypeArguments="x:String" Name="requestEndDate" />
+    </Sequence.Variables>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_1" logLevel="DEBUG" logMsg="=====================검사요청목록 가져오기 시작===================" />
+    <Sequence DisplayName="환경설정" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Boolean">[isSRM_Page]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[isSRM_PageCnt]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Boolean">[isNext_Page]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[isNext_Pagecnt]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(x:String)">[out_Lst오더번호]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of string)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[requestStartDate]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[Now.ToString("yyyyMMdd")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_14">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[requestEndDate]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[Now.AddDays(-30).ToString("yyyyMMdd")]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <DoWhile sap2010:WorkflowViewState.IdRef="DoWhile_1" Condition="[( Not isSRM_Page ) And isSRM_PageCnt &lt;= 15]">
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" ContinueOnError="True" DisplayName="Finder" ElementAttrXml="&lt;Self classname=&quot;logo&quot; xpath=&quot;/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/section[1]/div[1]/img[1]&quot; /&gt;" ElementPosition="100, 151" FindAttrName="" FindResult="[isSRM_Page]" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_2" ImageFileName="ehgc7dsM7HvnYJo0kOjb.png" OffsetX="-1" OffsetY="-1" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+        <antbot:IfThenCodeActivity Condition="[Not isSRM_Page]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_1">
+          <ActivityAction>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[isSRM_PageCnt]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[isSRM_PageCnt + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </antbot:IfThenCodeActivity>
+      </Sequence>
+    </DoWhile>
+    <antbot:IfThenCodeActivity Condition="[isSRM_PageCnt = 15]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_2">
+      <ActivityAction>
+        <Throw Exception="[New Exception(&quot;SRM페이지 이동 작업이 실패했습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </ActivityAction>
+    </antbot:IfThenCodeActivity>
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self innertext=&quot;구매/계약&quot; id=&quot;ext-gen1105&quot; tagname=&quot;span&quot; classname=&quot;x-btn-inner&quot; xpath=&quot;/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/em[1]/button[1]/span[1]&quot; /&gt;" ElementPosition="367, 157" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_3" ImageFileName="rDb9KR6P8cDsur7W56OL.png" OffsetX="32" OffsetY="9" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self innertext=&quot;물품검사&quot; href=&quot;#&quot; hidefocus=&quot;true&quot; unselectable=&quot;on&quot; tagname=&quot;a&quot; classname=&quot;x-menu-item-link&quot; xpath=&quot;/html[1]/body[1]/div[5]/div[1]/div[2]/div[5]/a[1]&quot; /&gt;" ElementPosition="414, 253" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_4" ImageFileName="0E8WESQKSKZKoO3L9X9T.png" OffsetX="80" OffsetY="13" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+    <antbot:FinderAutoActivity DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DelayAfter="1000" DisplayName="Finder" ElementAttrXml="&lt;Self innertext=&quot;검사요청목록&quot; href=&quot;#&quot; hidefocus=&quot;true&quot; unselectable=&quot;on&quot; id=&quot;ext-gen1252&quot; tagname=&quot;a&quot; classname=&quot;x-menu-item-link&quot; xpath=&quot;/html[1]/body[1]/div[6]/div[1]/div[2]/div[3]/a[1]&quot; /&gt;" ElementPosition="595, 288" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_5" ImageFileName="DIBHPBZS3tXWblqjWGbz.png" OffsetX="80" OffsetY="13" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+    <DoWhile sap2010:WorkflowViewState.IdRef="DoWhile_2" Condition="[( Not isNext_Page ) And isNext_PageCnt &lt;= 15]">
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <antbot:FinderAutoActivity DelayAfter="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" ContinueOnError="True" DelayBefore="500" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;label-1071&quot; innertext=&quot;사전납품검사 요청목록&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot; tagname=&quot;label&quot; classname=&quot;x-component title x-component-default x-box-item x-toolbar-item&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/label[1]&quot; /&gt;&lt;IFrame id=&quot;ext-gen2678&quot; name=&quot;ext-gen2678&quot; index=&quot;1&quot; /&gt;" ElementPosition="72, 328" FindAttrName="" FindResult="[isNext_Page]" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_6" ImageFileName="jBvQlwcTP0bZJ6Numl4I.png" OffsetX="76" OffsetY="9" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+        <antbot:IfThenCodeActivity Condition="[Not isNext_Page]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_3">
+          <ActivityAction>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[isNext_PageCnt]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[isNext_PageCnt + 1]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </antbot:IfThenCodeActivity>
+      </Sequence>
+    </DoWhile>
+    <antbot:IfThenCodeActivity Condition="[isNext_PageCnt = 15]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_4">
+      <ActivityAction>
+        <Throw Exception="[New Exception(&quot;검사요청목록메뉴 이동 작업에 실패하였습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+      </ActivityAction>
+    </antbot:IfThenCodeActivity>
+    <Sequence DisplayName="조회조건 설정" sap2010:WorkflowViewState.IdRef="Sequence_9">
+      <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;ext-gen1096&quot; type=&quot;text&quot; name=&quot;prog_sts&quot; size=&quot;20&quot; value=&quot;전체&quot; autocomplete=&quot;off&quot; aria-invalid=&quot;false&quot; role=&quot;textbox&quot; aria-describedby=&quot;ext-gen1099&quot; aria-required=&quot;false&quot; tagname=&quot;input&quot; classname=&quot;x-form-field x-form-text x-trigger-noedit&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]&quot; /&gt;&lt;IFrame id=&quot;ext-gen2678&quot; name=&quot;ext-gen2678&quot; index=&quot;1&quot; /&gt;" ElementPosition="316, 265" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_7" ImageFileName="g2lkhfDnzjO5VgnWVPzt.png" OffsetX="255" OffsetY="12" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+      <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self role=&quot;option&quot; value=&quot;0&quot; innertext=&quot;합격&quot; tagname=&quot;li&quot; xpath=&quot;/html[1]/body[1]/div[8]/div[1]/ul[1]/li[4]&quot; /&gt;&lt;IFrame index=&quot;1&quot; /&gt;" ElementPosition="240, 352" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_8" ImageFileName="gtOmMt89fmE0G08pctrW.png" OffsetX="263" OffsetY="12" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+      <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self type=&quot;text&quot; name=&quot;exam_req_start_date&quot; size=&quot;20&quot; value=&quot;____/__/__&quot; autocomplete=&quot;off&quot; aria-invalid=&quot;false&quot; role=&quot;textbox&quot; aria-describedby=&quot;ext-gen1112&quot; aria-required=&quot;false&quot; tagname=&quot;input&quot; classname=&quot;x-form-field x-form-text&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/input[1]&quot; /&gt;&lt;IFrame index=&quot;1&quot; /&gt;" ElementPosition="1113, 270" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_14" ImageFileName="esXsCuySUYTC5ofk9IPD.png" OffsetX="42" OffsetY="12" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+      <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" MDelayMiliSec="{x:Null}" DelayBefore="500" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_1" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="True" isShiftKey="False" isWinKey="False" spKey="a" />
+      <antbot:CommentOut DisplayName="Ignored Activities">
+        <Sequence DisplayName="Ignored Activities">
+          <antbot:KeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DisplayName="키보드입력 - 시작날짜" sap2010:WorkflowViewState.IdRef="KeyInActivity_3" IgnoreDefaultDelayForKeyIn="False" KeyInText="[requestEndDate]" />
+        </Sequence>
+        <sap2010:WorkflowViewState.IdRef>CommentOut_1</sap2010:WorkflowViewState.IdRef>
+      </antbot:CommentOut>
+      <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" MDelayMiliSec="{x:Null}" DelayBefore="1000" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_2" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="False" isShiftKey="False" isSpecialKey="True" isWinKey="False" spKey="TAB" />
+      <antbot:CommentOut DisplayName="Ignored Activities">
+        <Sequence DisplayName="Ignored Activities">
+          <antbot:KeyInActivity DelayAfter="{x:Null}" MDelayMiliSec="{x:Null}" DelayBefore="500" DisplayName="키보드입력 - 종료날짜" sap2010:WorkflowViewState.IdRef="KeyInActivity_1" IgnoreDefaultDelayForKeyIn="False" KeyInText="[requestStartDate]" />
+        </Sequence>
+        <sap2010:WorkflowViewState.IdRef>CommentOut_2</sap2010:WorkflowViewState.IdRef>
+      </antbot:CommentOut>
+    </Sequence>
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="None" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self innertext=&quot;조회&quot; tagname=&quot;span&quot; classname=&quot;x-btn-inner search&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/em[1]/button[1]/span[1]&quot; /&gt;&lt;IFrame index=&quot;1&quot; /&gt;" ElementPosition="1403, 331" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_11" ImageFileName="xCWsyJ7M2UaYcoMQT8K0.png" OffsetX="23" OffsetY="8" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" DelayBefore="1000" DisplayName="Finder" ElementAttrXml="&lt;Self role=&quot;presentation&quot; tagname=&quot;div&quot; classname=&quot;x-box-inner&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]&quot; /&gt;&lt;IFrame index=&quot;1&quot; /&gt;" ElementPosition="899, 824" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_12" ImageFileName="UTM48bKlMXiAaGybJqmI.png" OffsetX="-1" OffsetY="-1" ProcessName="chrome" ResultElementText="[isNoData]" Retry="3" WindowTitle="SMARTsuite Application" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="[isNodata]" />
+    <If Condition="[IsNoData.Equals(&quot;데이터가 존재하지 않습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Throw Exception="[New Exception(&quot;검사요청목록 오더번호 데이터가 존재하지 않습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Int32" Name="tr_idx" />
+          </Sequence.Variables>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_10">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[tr_idx]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">2</InArgument>
+            </Assign.Value>
+          </Assign>
+          <antbot:ForEachGenericCodeActivity x:TypeArguments="x:Int32" DisplayName="ForEach" sap2010:WorkflowViewState.IdRef="ForEachGenericCodeActivity`1_2" Values="[Enumerable.Range( 1, cint(split(isNodata, &quot; &quot;)(0).ToString) )]">
+            <ActivityAction x:TypeArguments="x:Int32">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:Int32" Name="NodataCnt" />
+              </ActivityAction.Argument>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_8" logLevel="DEBUG" logMsg="============================" />
+                <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" DisplayName="Finder" ElementAttrXml="[&quot;&lt;Self tagname=&quot;&quot;td&quot;&quot; classname=&quot;&quot; x-grid-cell x-grid-cell-gridcolumn-1054   &quot;&quot; xpath=&quot;&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/table[1]/tbody[1]/tr[&quot; + tr_idx.ToString + &quot;]/td[5]&quot;&quot; /&gt;&lt;IFrame index=&quot;&quot;1&quot;&quot; /&gt;&quot;]" ElementPosition="576, 382" FindAttrName="" FinderAutoType="Web" FinderScrollOption="None" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_13" ImageFileName="8zpbi0skGueUOZraLbBL.png" OffsetX="-1" OffsetY="-1" ProcessName="chrome" ResultElementText="[inOderNum]" Retry="3" WindowTitle="SMARTsuite Application" />
+                <AddToCollection x:TypeArguments="x:String" Collection="[out_Lst오더번호]" DisplayName="AddToCollection&lt;String&gt;" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[inOderNum]" />
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_11">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[tr_idx]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[tr_idx + 1]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </ActivityAction>
+          </antbot:ForEachGenericCodeActivity>
+        </Sequence>
+      </If.Else>
+    </If>
+    <Sequence DisplayName="중복 오더번호 제거" sap2010:WorkflowViewState.IdRef="Sequence_10">
+      <Assign DisplayName="Assign - 중복제거" sap2010:WorkflowViewState.IdRef="Assign_12">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(x:String)">[out_Lst오더번호]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(x:String)">[out_Lst오더번호.Distinct().ToList()]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_10" logLevel="DEBUG" logMsg="[&quot;처리 오더번호 건 수&gt;&gt;&gt;&quot; + out_Lst오더번호.Count.ToString]" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_7" logLevel="DEBUG" logMsg="=====================검사요청목록 가져오기 종료===================" />
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogCodeActivity_1" sap:VirtualizedContainerService.HintSize="604,92" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="604,784">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FinderAutoActivity_2" sap:VirtualizedContainerService.HintSize="301,251" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="301,201" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="323,616">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="604,776" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_2" sap:VirtualizedContainerService.HintSize="604,163" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_3" sap:VirtualizedContainerService.HintSize="604,193" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_4" sap:VirtualizedContainerService.HintSize="604,180" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_5" sap:VirtualizedContainerService.HintSize="604,180" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_6" sap:VirtualizedContainerService.HintSize="301,180" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="301,201" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="323,545">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DoWhile_2" sap:VirtualizedContainerService.HintSize="604,705" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_4" sap:VirtualizedContainerService.HintSize="604,163" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_7" sap:VirtualizedContainerService.HintSize="301,180" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_8" sap:VirtualizedContainerService.HintSize="301,180" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_14" sap:VirtualizedContainerService.HintSize="301,196" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_1" sap:VirtualizedContainerService.HintSize="301,109" />
+      <sap2010:ViewStateData Id="KeyInActivity_3" sap:VirtualizedContainerService.HintSize="301,60" />
+      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="301,50" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_2" sap:VirtualizedContainerService.HintSize="301,109" />
+      <sap2010:ViewStateData Id="KeyInActivity_1" sap:VirtualizedContainerService.HintSize="301,60" />
+      <sap2010:ViewStateData Id="CommentOut_2" sap:VirtualizedContainerService.HintSize="301,50" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="604,1238">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FinderAutoActivity_11" sap:VirtualizedContainerService.HintSize="604,213" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_12" sap:VirtualizedContainerService.HintSize="604,180" />
+      <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="604,92" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="357,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_8" sap:VirtualizedContainerService.HintSize="319,92" />
+      <sap2010:ViewStateData Id="FinderAutoActivity_13" sap:VirtualizedContainerService.HintSize="319,182" />
+      <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="319,22" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="319,60" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="341,600">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachGenericCodeActivity`1_2" sap:VirtualizedContainerService.HintSize="357,706" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="379,930">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="604,1076" />
+      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="604,184">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogCodeActivity_10" sap:VirtualizedContainerService.HintSize="604,92" />
+      <sap2010:ViewStateData Id="LogCodeActivity_7" sap:VirtualizedContainerService.HintSize="604,92" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="626,7167">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="666,7247" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
