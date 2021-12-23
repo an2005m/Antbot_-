@@ -201,7 +201,7 @@
                                 <InArgument x:TypeArguments="s:String[]" x:Key="arrProcess">[stopProcesses]</InArgument>
                               </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
                             </antbot:ExecuteXamlWorkflowCodeActivity>
-                            <antbot:IfThenCodeActivity Condition="[String.IsNullOrWhiteSpace(conf(&quot;SRM_Url&quot;)) Or&#xD;&#xA;String.IsNullOrWhiteSpace(conf(&quot;담당자&quot;)) Or&#xD;&#xA;String.IsNullOrWhiteSpace(conf(&quot;연락처&quot;)) Or&#xD;&#xA;String.IsNullOrWhiteSpace(conf(&quot;차량번호&quot;))]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_7">
+                            <antbot:IfThenCodeActivity Condition="[String.IsNullOrWhiteSpace(conf(&quot;SRM_Url&quot;)) Or&#xA;String.IsNullOrWhiteSpace(conf(&quot;담당자&quot;)) Or&#xA;String.IsNullOrWhiteSpace(conf(&quot;연락처&quot;)) Or&#xA;String.IsNullOrWhiteSpace(conf(&quot;차량번호&quot;))]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_7">
                               <ActivityAction>
                                 <Throw Exception="[New Exception(&quot;Config정보(Value)가 비어있습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
                               </ActivityAction>
@@ -358,12 +358,12 @@
                                         <Sequence DisplayName="GetExcelFileData" sap2010:WorkflowViewState.IdRef="Sequence_36">
                                           <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - GetExcelFileData.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_17" WorkflowPath="Process\납품서등록\GetExcelFileData.xaml">
                                             <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_conf">[conf]</InArgument>
                                               <OutArgument x:TypeArguments="x:String" x:Key="out_GetExcelPath">[GetExcelPath]</OutArgument>
                                               <OutArgument x:TypeArguments="x:String" x:Key="out_자재코드">[자재코드]</OutArgument>
                                               <OutArgument x:TypeArguments="x:String" x:Key="out_OderNum">[oderNum]</OutArgument>
                                               <OutArgument x:TypeArguments="x:String" x:Key="out_StartBarcodeNum">[startBarcodeNum]</OutArgument>
                                               <OutArgument x:TypeArguments="x:String" x:Key="out_EndBarcodeNum">[endBarcodeNum]</OutArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="in_GetFileFolderName">납품서등록(RPA)</InArgument>
                                             </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
                                           </antbot:ExecuteXamlWorkflowCodeActivity>
                                         </Sequence>
@@ -516,7 +516,7 @@
       <Variable x:TypeArguments="x:Int32" Name="index" />
       <Variable x:TypeArguments="x:Boolean" Name="allProcess" />
     </StateMachine.Variables>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d3ZDOlxVc2Vyc1xVU0VSXERlc2t0b3Bc7YyM7Yq464SI64+Z67CY7ISx7J6l7YyAIFJQQeqzvOyXhVzrrLzsnpDsl4XrrLQg7J6Q64+Z7ZmUX+2FjOyKpO2KuFxNYWluXzAyX+uCqe2SiOyEnOuTseuhnS54YW1stwE9A4gEEgIBAT8H9QMPAwG9Ab8BD/ADFwMBmgHDAhfsAx8CATCEAh+qAicCAR/uARe+Ah8CAQJBC7oBFgMBxAG9AWq9AYQBAwHBAfMDjgHzA6sBAwG/AcEBE+kBLwMBoQHsAWzsAYkBAwGeAcECcsECjAEDAZwBxQIb4gMmAgE35QOXAeUDtAECATTmA5wB5gO2AQIBMoYCI6gCLgIBIfABG/8BNwIBEoICfYICqgECAQ67AjO7AkQCAQyvAh+5AioCAQRCDUg2AwGFAkkNTTYDAYICTg25ARgDAcUBwQE4wQFSAwG7AcMBF+cBIgMBogHGAh3XAigDAZEB2AId4QMoAgE4hwIlhwLMAQIBLogCJacCQQIBIvABQPABUwIBHfIBH/0BKgIBE7ACIbAC6gECAQqxAiG4AioCAQVCugFC3AEDAYoCRlFGXQMBiAJFUEVyAwGHAkRORFgDAYYCSboBSdwBAwGEAktOS1kDAYMCUBGjARwDAc8BqwEVtQEgAwHGAcUBG9EBJgMBrAHZAR/jASoDAaMBxwIfzgIoAwGWAc8CH9YCKAMBkgHaAiHLAywCAULTAyXdAzACATmHArQBhwLJAQIBL4gCSogCZwIBLIoCKaUCLgIBI/MBIfMBwwECARv0ASH7ASoCARf8ASH8AY0BAgEUsAKwAbAC5wECAQu2Aku2AlkCAQizAkyzAlYCAQZRE1G7AgMBgQJSE1LFAQMB/wFTE1PhAQMB/AFUE1TBAQMB+QFVE1wcAwH1AV0TZBwDAfEBZRNtJwMB8AFuE3I8AwHtAXMTejwDAeYBexOCARwDAeEBgwETigEcAwHdAYsBE5IBHAMB2AGTAROaARwDAdQBmwETogEcAwHQAawBF7MBIAMBygG0ARe0AcABAwHHAcYBHcYBxgEDAbkBxwEdywFGAwG1AcwBHdABOQMBrQHaASHhASoDAacB4gEh4gHKAQMBpAHMAmTMAokBAwGZAckCZckCcQMBlwHUAmTUAokBAwGVAdECZdECbgMBkwHbAiPbAtIBAwGPAdwCI8oDLwIBQ9QDJ9sDMAIBPdwDJ9wD0AECATqKAjeKAk0CASSMAi2gAjgCASijAi2jAp8CAgEm8wGwAfMBwAECARz5AU/5AVgCARr2AVD2AV0CARj8AVL8AWACARVSogFSwgEDAYACU6IBU94BAwH9AVSvAVS+AQMB+gFaPlpXAwH4AVc/V0wDAfYBYlhiYQMB9AFfWV9fAwHyAW7rAW6HAgMB7wFwU3BeAwHuAXPVAnPyAgMB7AF4ZnhsAwHqAXZSdlgDAekBd1J3VQMB6AF1UXV5AwHnAYABPoABSwMB5AF9P31UAwHiAYgBQYgBSgMB4AGFAUKFAU8DAd4BkAE9kAFgAwHbAY0BPo0BSAMB2QGYAUCYAWQDAdcBlQFBlQFNAwHVAaABQKABYwMB0wGdAUGdAVADAdEBsQFFsQFQAwHNAa4BRq4BUwMBywG0AaYBtAG9AQMByAHGAawBxgHDAQMBugHHAe8BxwGLAgMBuAHJAV3JAWwDAbYBzAFCzAGjAgMBsAHOASHOAZYBAwGuAd8BT98BWgMBqgHcAVDcAV0DAagB4gGwAeIBxwEDAaUB2wKyAdsCzwEDAZAB5gIp8QI0AwGBAfQCLfoCOAIBfP0CMYgDPAIBbYoDY4oDcQIBa5sDPaUDSAIBXqgDQbEDTAIBU40DOZgDRAIBRNkDVdkDYAIBQNYDVtYDYwIBPtwDtgHcA80BAgE7jQIvkQJDAgErkgIvlgJDAgEqlwIvnwJDAgEpowK8AaMCnAICASfOATLOAWkDAa8B5wIr8AJUAwGCAfUCL/kCWAIBff4CM4cDXAIBbpwDP6QDaAIBX6kDQ7ADbAIBVI4DO5cDZAIBRecC2QHnAv4BAwGOAe4Cc+4CfQMBjQHtAnHtAoABAwGLAesCa+sCdAMBiQHsAnPsAoQBAwGHAekCcOkCfgMBhQHqAmjqAm4DAYMB9QKFAvUCnAIDAYAB9wKEAfcCigECAX6FA3WFA4EBAgF6/gLXAf4C8gECAXmBA3GBA3oCAXeAA3mAA4oBAgF1hAOIAYQDjgECAXOCA3eCA4YBAgFxgwNugwN0AgFvnAPiAZwD/AECAWqgA32gA4YBAgFoogOZAaIDogECAWaeA5QBngOaAQIBZJ8Dep8DgAECAWKhA5wBoQOoAQIBYK0DmwGtA6QBAgFcqQPsAakDjAICAVurA4EBqwOKAQIBWa4DngGuA6oBAgFXrAN+rAOEAQIBVY4D3wGOA/oBAgFSkgN5kgOCAQIBUJMDgQGTA5IBAgFOkQOQAZEDlgECAUyUA3+UA44BAgFKkAN2kAN8AgFIlQN+lQOMAQIBRg==</sads:DebugSymbol.Symbol>
   </StateMachine>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -750,7 +750,7 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="LogCodeActivity_17" sap:VirtualizedContainerService.HintSize="614,92" />
       <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_17" sap:VirtualizedContainerService.HintSize="314,89" />
-      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="200,50">
+      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="336,213">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -931,7 +931,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="179,97">
+      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="702,2156">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">100.4,489.3</av:Point>
@@ -982,7 +982,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_10" sap:VirtualizedContainerService.HintSize="466,2658">
+      <sap2010:ViewStateData Id="State_10" sap:VirtualizedContainerService.HintSize="183,97">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">98.8,167.7</av:Point>

@@ -712,7 +712,7 @@
       <sap2010:ViewStateData Id="Transition_2" sap:VirtualizedContainerService.HintSize="430,701">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">466.45,489.3 466.45,357.35 281.8,357.35</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">466.45,489.3 466.45,367.35 281.8,367.35</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">42</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">24</x:Int32>
           </scg:Dictionary>
@@ -733,7 +733,7 @@
       <sap2010:ViewStateData Id="Transition_3" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">281.8,396.2 439.6,396.2 439.6,489.3</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">281.8,406.2 439.6,406.2 439.6,489.3</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">52</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">30</x:Int32>
           </scg:Dictionary>
@@ -750,7 +750,7 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="LogCodeActivity_17" sap:VirtualizedContainerService.HintSize="614,92" />
       <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_17" sap:VirtualizedContainerService.HintSize="314,89" />
-      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="336,213">
+      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -931,7 +931,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="702,2156">
+      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="179,97">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">100.4,489.3</av:Point>
@@ -946,7 +946,7 @@
       <sap2010:ViewStateData Id="Transition_16" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">190.3,429.5 190.3,459.5 189.9,459.5 189.9,489.3</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">190.3,439.5 190.3,469.5 189.9,469.5 189.9,489.3</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">39</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">38</x:Int32>
           </scg:Dictionary>
@@ -955,7 +955,7 @@
       <sap2010:ViewStateData Id="State_9" sap:VirtualizedContainerService.HintSize="183,111">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">98.8,318.5</av:Point>
+            <av:Point x:Key="ShapeLocation">98.8,328.5</av:Point>
             <av:Size x:Key="ShapeSize">183,111</av:Size>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
             <x:Double x:Key="StateContainerWidth">168.60000000000002</x:Double>
@@ -967,7 +967,7 @@
       <sap2010:ViewStateData Id="Transition_17" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">190.3,264.7 190.3,318.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">190.3,264.7 190.3,328.5</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">39</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">38</x:Int32>
           </scg:Dictionary>
