@@ -57,7 +57,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <StateMachine DisplayName="Main StateMachine" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+  <StateMachine DisplayName="[파트너동반성장팀 물자업무 자동화 RPA 03. 신품화] MAIN" sap2010:WorkflowViewState.IdRef="StateMachine_1">
     <StateMachine.InitialState>
       <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="환경파일을 읽어와 기준정보를 설정합니다." DisplayName="Initial Configuration" sap2010:WorkflowViewState.IdRef="State_3">
         <State.Entry>
@@ -262,7 +262,7 @@
       <Variable x:TypeArguments="s:String[]" Name="str_작업시트목록" />
       <Variable x:TypeArguments="x:String" Name="str_보내기여부" />
     </StateMachine.Variables>
-    <sads:DebugSymbol.Symbol>d1FDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc7Iug7ZKI7ZmUIFdvcmtmbG93KOyCreygnOuyhOyghClcTWFpbldvcmtmbG93LnhhbWxoPAOKAhICAQHRARfwAR8CAXuWAQ+hARcCAXCmAQ/1ARcCAVE+B/kBDwIBAtMBG+oBNwMBhQHtAZ8B7QHVAQMBgAHuAZYB7gGyAQIBfZgBE58BGAIBcqgBE8wBHgIBWM8BbM8BiQECAVXzAZMB8wGtAQIBU0ALkQEWAgEJlAFrlAGIAQIBBqQBaaQBgwECAQTTAUDTAV0DAZUB1QEf6AEqAwGGAZgBIZgBWgIBc5oBF5oBtwECAXmdARedAbUBAgF3qQEVywEgAgFZQg97GgIBFIMBE40BHgIBCtYBIdYBwgEDAZMB1wEh3gEqAwGPAd8BIeYBKgMBigHnASHnAY0BAwGHAZoBpQGaAbQBAgF6nQGlAZ0BsgECAXirARm1ASQCAWO9AR3HASgCAVpDEUPFAQIBT0QRSxoCAUtMEVM1AgFGVBFaOgIBQFsRW4wDAgE6XBFiLQIBLmMRY88CAgEpZBFoJQIBKGkRbzoCASBwEXCyAQIBHnEReBoCARp5EXnSAQIBF3oResUBAgEVhAEViwEeAgEPjAEVjAGcAgIBC9YBrwHWAb8BAwGUAdwBT9wBWAMBkgHZAVDZAV0DAZAB5AFL5AFbAwGNAeEBTOEBWAMBiwHnAVLnAWADAYgBrAEbrAHIAQIBbq0BG7MBRAIBZrQBG7QByAECAWS+AR/FASgCAV7GAR/GAeABAgFbQ58BQ8IBAgFQST9JSAIBTkZARk0CAUxMrQFM1wECAUpRFVHDAQIBR1SxAVTIAQIBRVhqWHICAUNXVldkAgFCVlJWaAIBQVvSAVu5AgIBP1uAA1uJAwIBPlvDAlvYAgIBPVvrAlv5AgIBO1w2XFICATheFWAdAgEvY6QBY7EBAgEsY8UCY8wCAgErY8ABY6MCAgEqaaYBaboBAgEnbVFtXQIBJWtoa3ACASNsTmxZAgEhcJ8BcK8BAgEfdjt2PAIBHXM8c0YCARt5oAF5zwECARh6nwF6wgECARaJAUOJAU4CARKGAUSGAVECARCMAfgBjAGZAgIBDowBvwGMAdYBAgEMrAGpAawBxQECAW+tAbABrQHGAQIBbbABW7ABZwIBa68Bcq8BegIBabEBWLEBYwIBZ7QBqQG0AcUBAgFlwwFNwwFYAgFhwAFOwAFbAgFfxgGuAcYB3QECAVxRuAFRwAECAUhfF1+ZAwIBMl5QXmwCATBf2AFfvwICATdfjQNflgMCATZfyQJf5QICATVf+AJfhgMCATM=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d3BDOlxVc2Vyc1xVU0VSXERlc2t0b3Bc7YyM7Yq464SI64+Z67CY7ISx7J6l7YyAIFJQQeqzvOyXhVzrrLzsnpDsl4XrrLQg7J6Q64+Z7ZmUX+2FjOyKpO2KuFxNYWluXzAzX+yLoO2SiO2ZlC54YW1saDwDigISAgEB0QEX8AEfAgF7lgEPoQEXAgFwpgEP9QEXAgFRPgf5AQ8CAQLTARvqATcDAYUB7QGfAe0B1QEDAYAB7gGWAe4BsgECAX2YAROfARgCAXKoARPMAR4CAVjPAWzPAYkBAgFV8wGTAfMBrQECAVNAC5EBFgIBCZQBa5QBiAECAQakAWmkAYMBAgEE0wFA0wFdAwGVAdUBH+gBKgMBhgGYASGYAVoCAXOaAReaAbcBAgF5nQEXnQG1AQIBd6kBFcsBIAIBWUIPexoCARSDARONAR4CAQrWASHWAcIBAwGTAdcBId4BKgMBjwHfASHmASoDAYoB5wEh5wGNAQMBhwGaAaUBmgG0AQIBep0BpQGdAbIBAgF4qwEZtQEkAgFjvQEdxwEoAgFaQxFDxQECAU9EEUsaAgFLTBFTNQIBRlQRWjoCAUBbEVuMAwIBOlwRYi0CAS5jEWPPAgIBKWQRaCUCAShpEW86AgEgcBFwsgECAR5xEXgaAgEaeRF50gECARd6EXrFAQIBFYQBFYsBHgIBD4wBFYwBnAICAQvWAa8B1gG/AQMBlAHcAU/cAVgDAZIB2QFQ2QFdAwGQAeQBS+QBWwMBjQHhAUzhAVgDAYsB5wFS5wFgAwGIAawBG6wByAECAW6tARuzAUQCAWa0ARu0AcgBAgFkvgEfxQEoAgFexgEfxgHgAQIBW0OfAUPCAQIBUEk/SUgCAU5GQEZNAgFMTK0BTNcBAgFKURVRwwECAUdUsQFUyAECAUVYalhyAgFDV1ZXZAIBQlZSVmgCAUFb0gFbuQICAT9bgANbiQMCAT5bwwJb2AICAT1b6wJb+QICATtcNlxSAgE4XhVgHQIBL2OkAWOxAQIBLGPFAmPMAgIBK2PAAWOjAgIBKmmmAWm6AQIBJ21RbV0CASVraGtwAgEjbE5sWQIBIXCfAXCvAQIBH3Y7djwCAR1zPHNGAgEbeaABec8BAgEYep8BesIBAgEWiQFDiQFOAgEShgFEhgFRAgEQjAH4AYwBmQICAQ6MAb8BjAHWAQIBDKwBqQGsAcUBAgFvrQGwAa0BxgECAW2wAVuwAWcCAWuvAXKvAXoCAWmxAVixAWMCAWe0AakBtAHFAQIBZcMBTcMBWAIBYcABTsABWwIBX8YBrgHGAd0BAgFcUbgBUcABAgFIXxdfmQMCATJeUF5sAgEwX9gBX78CAgE3X40DX5YDAgE2X8kCX+UCAgE1X/gCX4YDAgEz</sads:DebugSymbol.Symbol>
   </StateMachine>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -292,7 +292,7 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_1" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,278">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,281">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -310,7 +310,7 @@
       <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="520,2272" />
       <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="273,92" />
       <sap2010:ViewStateData Id="LogCodeActivity_3" sap:VirtualizedContainerService.HintSize="273,92" />
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="571,278" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="571,238" />
       <sap2010:ViewStateData Id="State_1" sap:VirtualizedContainerService.HintSize="185,97">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -448,7 +448,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_3" sap:VirtualizedContainerService.HintSize="546,2678">
+      <sap2010:ViewStateData Id="State_3" sap:VirtualizedContainerService.HintSize="183,97">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">98.8,127.7</av:Point>
@@ -460,18 +460,18 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StateMachine_1" sap:VirtualizedContainerService.HintSize="614,773">
+      <sap2010:ViewStateData Id="StateMachine_1" sap:VirtualizedContainerService.HintSize="614,636">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <av:Point x:Key="ShapeLocation">160,2.5</av:Point>
             <x:Double x:Key="StateContainerWidth">600</x:Double>
-            <x:Double x:Key="StateContainerHeight">737.1</x:Double>
+            <x:Double x:Key="StateContainerHeight">600</x:Double>
             <av:PointCollection x:Key="ConnectorLocation">190,77.5 190,107.5 190.3,107.5 190.3,127.7</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="654,853" />
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="654,716" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
