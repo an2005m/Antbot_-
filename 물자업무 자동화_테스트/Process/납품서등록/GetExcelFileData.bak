@@ -136,6 +136,7 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("구매오더번호").tostring]</InArgument>
       </Assign.Value>
     </Assign>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;구매오더번호&gt;&gt;&gt;&quot; + out_OderNum]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_6" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_자재코드]</OutArgument>
@@ -144,6 +145,7 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("자재코드").tostring]</InArgument>
       </Assign.Value>
     </Assign>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;자재코드&gt;&gt;&gt;&quot; + out_자재코드]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_7" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_StartBarcodeNum]</OutArgument>
@@ -152,6 +154,7 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("바코드번호").tostring]</InArgument>
       </Assign.Value>
     </Assign>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;Start바코드 번호&gt;&gt;&gt;&quot; + out_StartBarcodeNum]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_8" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_EndBarcodeNum]</OutArgument>
@@ -160,8 +163,9 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(dt_작업.Rows.Count-1)("바코드번호").tostring]</InArgument>
       </Assign.Value>
     </Assign>
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;End바코드 번호&gt;&gt;&gt;&quot; + out_EndBarcodeNum]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_9" />
     <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_5" logLevel="DEBUG" logMsg="================엑셀파일 데이터 가져오기 종료==================" />
-    <sads:DebugSymbol.Symbol>d4cBQzpcVXNlcnNcVVNFUlxEZXNrdG9wXO2MjO2KuOuEiOuPmeuwmOyEseyepe2MgCBSUEHqs7zsl4Vc66y87J6Q7JeF66y0IOyekOuPme2ZlF/thYzsiqTtirhcUHJvY2Vzc1zrgqntkojshJzrk7HroZ1cR2V0RXhjZWxGaWxlRGF0YS54YW1sNUoDpQEOAgEBUAVQygECAURRBVwQAgE2XQVhIQIBMWIFZiECASxnBW4OAgEobwWBASQCARaCAQWCAc4BAgEUgwEFigEOAgEQiwEFkgEOAgEMkwEFmgEOAgEImwEFogEOAgEEowEFowHKAQIBAlCTAVDHAQIBRVIHWRACAUBaB1rJAQIBPVsHW+0BAgE3XSpdRQIBNF8JX3oCATJiKmJJAgEvZAlkrgECAS1sMGxyAgEraTFpQwIBKW+XAW+rAQIBJnQJfxQCAReCAZMBggHLAQIBFYgBMIgBUgIBE4UBMYUBPgIBEZABMJABUAIBD40BMY0BOwIBDZgBMJgBUQIBC5UBMZUBRgIBCaABMKABYgIBB50BMZ0BRAIBBaMBkwGjAccBAgEDVzJXcAIBQ1QzVEACAUFalQFaxgECAT5bsQFb2gECATtbTFtTAgE6W15bbgIBOF8aX00CATNkGmSBAQIBLngLeKUBAgEjeQt9JwIBHn4Lfq4CAgEYeJYBeKIBAgEkeTB5SgIBIXsPe5QBAgEffogCfpECAgEcfpwCfqsCAgEafowBfpEBAgEZeyB7ZwIBIA==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d4cBQzpcVXNlcnNcVVNFUlxEZXNrdG9wXO2MjO2KuOuEiOuPmeuwmOyEseyepe2MgCBSUEHqs7zsl4Vc66y87J6Q7JeF66y0IOyekOuPme2ZlF/thYzsiqTtirhcUHJvY2Vzc1zrgqntkojshJzrk7HroZ1cR2V0RXhjZWxGaWxlRGF0YS54YW1sPUoDqQEOAgEBUAVQygECAVBRBVwQAgFCXQVhIQIBPWIFZiECAThnBW4OAgE0bwWBASQCASKCAQWCAc4BAgEggwEFigEOAgEciwEFiwHGAQIBGYwBBZMBDgIBFZQBBZQBwQECARKVAQWcAQ4CAQ6dAQWdAdMBAgELngEFpQEOAgEHpgEFpgHPAQIBBKcBBacBygECAQJQkwFQxwECAVFSB1kQAgFMWgdayQECAUlbB1vtAQIBQ10qXUUCAUBfCV96AgE+YipiSQIBO2QJZK4BAgE5bDBscgIBN2kxaUMCATVvlwFvqwECATJ0CX8UAgEjggGTAYIBywECASGIATCIAVICAR+FATGFAT4CAR2LAV+LAY8BAgEakQEwkQFQAgEYjgExjgE7AgEWlAFflAGKAQIBE5oBMJoBUQIBEZcBMZcBRgIBD50BX50BnAECAQyjATCjAWICAQqgATGgAUQCAQimAV+mAZgBAgEFpwGTAacBxwECAQNXMldwAgFPVDNUQAIBTVqVAVrGAQIBSluxAVvaAQIBR1tMW1MCAUZbXltuAgFEXxpfTQIBP2QaZIEBAgE6eAt4pQECAS95C30nAgEqfgt+rgICASR4lgF4ogECATB5MHlKAgEtew97lAECASt+iAJ+kQICASh+nAJ+qwICASZ+jAF+kQECASV7IHtnAgEs</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -195,18 +199,22 @@
       <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="326,584" />
       <sap2010:ViewStateData Id="LogCodeActivity_4" sap:VirtualizedContainerService.HintSize="326,92" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="326,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_6" sap:VirtualizedContainerService.HintSize="326,92" />
       <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="326,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_7" sap:VirtualizedContainerService.HintSize="326,92" />
       <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="326,60" />
-      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="325,60" />
-      <sap2010:ViewStateData Id="LogCodeActivity_5" sap:VirtualizedContainerService.HintSize="325,92" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="348,2428">
+      <sap2010:ViewStateData Id="LogCodeActivity_8" sap:VirtualizedContainerService.HintSize="326,92" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="326,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_9" sap:VirtualizedContainerService.HintSize="326,92" />
+      <sap2010:ViewStateData Id="LogCodeActivity_5" sap:VirtualizedContainerService.HintSize="326,92" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="348,2956">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="388,2548" />
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="388,3076" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

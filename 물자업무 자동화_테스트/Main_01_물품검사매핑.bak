@@ -370,7 +370,7 @@
                                                 <FlowStep.Next>
                                                   <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_4">
                                                     <Sequence DisplayName="품질검사 다수번호매핑" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                                                      <antbot:IfThenCodeActivity Condition="[Dic_다수번호매핑.Count &lt;&gt; 0]" DisplayName="If Then">
+                                                      <antbot:IfThenCodeActivity Condition="[Dic_다수번호매핑.Count &lt;&gt; 0]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_8">
                                                         <ActivityAction>
                                                           <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 다수번호매핑.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_16" WorkflowPath="Process\물품검사매핑\다수번호매핑.xaml">
                                                             <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
@@ -379,7 +379,6 @@
                                                             </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
                                                           </antbot:ExecuteXamlWorkflowCodeActivity>
                                                         </ActivityAction>
-                                                        <sap2010:WorkflowViewState.IdRef>IfThenCodeActivity_8</sap2010:WorkflowViewState.IdRef>
                                                       </antbot:IfThenCodeActivity>
                                                     </Sequence>
                                                   </FlowStep>
@@ -455,7 +454,7 @@
       <Variable x:TypeArguments="s:String[]" Name="stopProcesses" />
       <Variable x:TypeArguments="x:Int32" Name="index" />
     </StateMachine.Variables>
-    <sads:DebugSymbol.Symbol>d3lDOlxVc2Vyc1xVU0VSXERlc2t0b3Bc7YyM7Yq464SI64+Z67CY7ISx7J6l7YyAIFJQQeqzvOyXhVzrrLzsnpDsl4XrrLQg7J6Q64+Z7ZmUX+2FjOyKpO2KuFxNYWluXzAxX+usvO2SiOqygOyCrOunpO2VkS54YW1slwE8A8sDEgIBAT4HuQMPAwGOAbYBD7QDFwIBbroCF7ADHwIBMPsBH6ECJwIBH+UBF7UCHwIBAkALsQEWAwGVAbQBarQBhAEDAZIBtwOOAbcDqwEDAZABuAET4AEvAgF14wFs4wGJAQIBcrgCcrgCjAECAXC8AhulAyYCATeoA5cBqAO0AQIBNKkDnAGpA7YBAgEy/QEjnwIuAgEh5wEb9gE3AgES+QF9+QGqAQIBDrICM7ICRAIBDKYCH7ACKgIBBEENRTYDAdABRg2wARgDAZYBuAE4uAFSAwGMAboBF94BIgIBdr0CHc4CKAIBZc8CHaQDKAIBOP4BJf4BzAECAS7/ASWeAkECASLnAUDnAVMCAR3pAR/0ASoCAROnAiGnAuoBAgEKqAIhrwIqAgEFQboBQdwBAwHSAUNOQ1oDAdEBSBGaARwDAaABogEVrAEgAwGXAbwBG8gBJgMBgAHQAR/aASoCAXe+Ah/FAigCAWrGAh/NAigCAWbRAiGOAywCAUKWAyWgAzACATn+AbQB/gHJAQIBL/8BSv8BZwIBLIECKZwCLgIBI+oBIeoBwwECARvrASHyASoCARfzASHzAY0BAgEUpwKwAacC5wECAQutAkutAlkCAQiqAkyqAlYCAQZJE0m7AgMBzwFKE0rFAQMBzQFLE0vBAQMBygFME1McAwHGAVQTWxwDAcIBXBNkJwMBwQFlE2k8AwG+AWoTcTwDAbcBchN5HAMBsgF6E4EBHAMBrgGCAROJARwDAakBigETkQEcAwGlAZIBE5kBHAMBoQGjAReqASADAZsBqwEXqwHAAQMBmAG9AR29AcYBAwGKAb4BHcIBRgMBhgHDAR3HATkDAYEB0QEh2AEqAgF72QEh2QHKAQIBeMMCVMMCaQIBbcACVcACXgIBa8sCZMsChwECAWnIAmXIAnECAWfSAiPSAtIBAgFj0wIjjQMvAgFDlwMnngMwAgE9nwMnnwPQAQIBOoECN4ECTQIBJIMCLZcCOAIBKJoCLZoCnwICASbqAbAB6gHAAQIBHPABT/ABWAIBGu0BUO0BXQIBGPMBUvMBYAIBFUqiAUrCAQMBzgFLrwFLvgEDAcsBUT5RVwMByQFOP05MAwHHAVlYWWEDAcUBVllWXwMBwwFl6wFlhwIDAcABZ1NnXgMBvwFq1QJq8gIDAb0Bb2ZvbAMBuwFtUm1YAwG6AW5SblUDAbkBbFFseQMBuAF3PndLAwG1AXQ/dFQDAbMBf0F/SgMBsQF8QnxPAwGvAYcBPYcBYAMBrAGEAT6EAUgDAaoBjwFAjwFkAwGoAYwBQYwBTQMBpgGXAUCXAWMDAaQBlAFBlAFQAwGiAagBRagBUAMBngGlAUalAVMDAZwBqwGmAasBvQEDAZkBvQGsAb0BwwEDAYsBvgHvAb4BiwIDAYkBwAFdwAFsAwGHAcMBQsMBegMBhAHFASHFAZYBAwGCAdYBT9YBWgIBftMBUNMBXQIBfNkBsAHZAccBAgF50gKyAdICzwECAWTWAincAjQCAV7fAi3mAjgCAVfpAjHxAjwCAU70AjWAA0ACAUScA1WcA2ACAUCZA1aZA2MCAT6fA7YBnwPNAQIBO4QCL4gCQwIBK4kCL40CQwIBKo4CL5YCQwIBKZoCvAGaApwCAgEnxQEyxQFpAwGDAdcCK9sCVAIBX+ACL+UCWAIBWOoCM/ACXAIBT/UCN/8CUwIBRdcCgQLXApgCAgFi2QKAAdkChgECAWDgAtMB4ALvAQIBXeIChAHiAooBAgFb4wJ54wKCAQIBWeoC1QHqAu8BAgFW7QJ77QKEAQIBVOwCiAHsAo4BAgFS7gKQAe4CnAECAVD1Alz1AnsCAUz3Ajv8AmQCAUb3At8B9wL7AQIBS/kCkAH5ApYBAgFJ+gKWAfoCogECAUc=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </StateMachine>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -732,7 +731,7 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_16" sap:VirtualizedContainerService.HintSize="314,89" />
       <sap2010:ViewStateData Id="IfThenCodeActivity_8" sap:VirtualizedContainerService.HintSize="330,230" />
-      <sap2010:ViewStateData Id="Sequence_34" sap:VirtualizedContainerService.HintSize="352,354">
+      <sap2010:ViewStateData Id="Sequence_34" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -750,27 +749,27 @@
       <sap2010:ViewStateData Id="FlowStep_3">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">200,307.5</av:Point>
+            <av:Point x:Key="ShapeLocation">200,317.5</av:Point>
             <av:Size x:Key="ShapeSize">200,50</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">300,357.5 300,407.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">300,367.5 300,407.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">200,217.5</av:Point>
+            <av:Point x:Key="ShapeLocation">200,227.5</av:Point>
             <av:Size x:Key="ShapeSize">200,50</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">300,267.5 300,307.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">300,277.5 300,317.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
+            <av:Point x:Key="ShapeLocation">200,137.5</av:Point>
             <av:Size x:Key="ShapeSize">200,50</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">300,177.5 300,217.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">300,187.5 300,227.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -781,7 +780,7 @@
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
             <av:Point x:Key="ShapeLocation">270,12.5</av:Point>
             <av:Size x:Key="ShapeSize">60,75</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">300,87.5 300,127.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">300,87.5 300,137.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
