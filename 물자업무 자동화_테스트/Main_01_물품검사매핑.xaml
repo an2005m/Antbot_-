@@ -59,14 +59,32 @@
   </TextExpression.ReferencesForImplementation>
   <StateMachine sap2010:Annotation.AnnotationText="ABC(AntBot Based Component) Framework&#xA;- 프로젝트 실행 시 현재 실행 중인 모든 EXCEL 및 chrome 프로세스가 종료됩니다. &#xA;  (config 파일에서 종료할 프로세스 세팅가능. EXCEL은 Config Setting으로 인해 필수 종료)" DisplayName="[파트너동반성장팀 물자업무 자동화 RPA 01. 물품검사매핑] MAIN" sap2010:WorkflowViewState.IdRef="StateMachine_2">
     <StateMachine.InitialState>
-      <State x:Name="__ReferenceID7" sap2010:Annotation.AnnotationText="환경파일을 읽어와 기준정보를 설정합니다." DisplayName="Initial Configuration" sap2010:WorkflowViewState.IdRef="State_10">
+      <State x:Name="__ReferenceID8" sap2010:Annotation.AnnotationText="환경파일을 읽어와 기준정보를 설정합니다." DisplayName="Initial Configuration" sap2010:WorkflowViewState.IdRef="State_10">
         <State.Entry>
           <Sequence sap2010:WorkflowViewState.IdRef="Sequence_35">
-            <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="Invoke Xaml - OpenQuestionPopup.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_17" WorkflowPath="Component\OpenQuestionPopup.xaml">
-              <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_PopupTitle">물품검사매핑RPA 시작</InArgument>
-              </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-            </antbot:ExecuteXamlWorkflowCodeActivity>
+            <Sequence DisplayName="Sequence - 실행 전 질문 팝업" sap2010:WorkflowViewState.IdRef="Sequence_40">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="StringButtonName" />
+              </Sequence.Variables>
+              <antbot:OpenMsgBoxCodeActivity DisplayName="메세지 박스 - 봇 실행 전 질문 팝업" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_5" MsgBoxButton="YesNo" MsgBoxChosenBtn="[StringButtonName]" MsgBoxContent="[&quot;RPA를 수행하시겠습니까?&quot; + vbNewline + &quot;(작업 중인 모든 문서는 저장 후 종료해 주세요.)&quot;]" MsgBoxIcon="Confirm" MsgBoxTitle="물품검사매핑RPA 시작" />
+              <If Condition="[StringButtonName.Equals( &quot;Yes&quot; ) = True]" sap2010:WorkflowViewState.IdRef="If_3">
+                <If.Then>
+                  <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_32" logLevel="DEBUG" logMsg="'예'선택 업무를 시작합니다." />
+                </If.Then>
+                <If.Else>
+                  <TerminateWorkflow sap2010:WorkflowViewState.IdRef="TerminateWorkflow_2" Reason="'아니오'선택 업무를 종료합니다." />
+                </If.Else>
+              </If>
+            </Sequence>
+            <antbot:CommentOut DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+              <Sequence DisplayName="Ignored Activities">
+                <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_17" WorkflowPath="Component\OpenQuestionPopup.xaml">
+                  <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_PopupTitle">물품검사매핑RPA 시작</InArgument>
+                  </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                </antbot:ExecuteXamlWorkflowCodeActivity>
+              </Sequence>
+            </antbot:CommentOut>
             <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_2">
               <TryCatch.Try>
                 <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
@@ -168,7 +186,7 @@
                           <InArgument x:TypeArguments="s:Exception">[exception]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_30" logLevel="DEBUG" logMsg="[systemError.Message]" />
+                      <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지 박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_2" MsgBoxButton="Ok" MsgBoxContent="[systemError.Message]" MsgBoxIcon="Confirm" MsgBoxTitle="Initial Configuration &gt;&gt; " />
                     </Sequence>
                   </ActivityAction>
                 </Catch>
@@ -214,7 +232,7 @@
                                     <InArgument x:TypeArguments="s:Exception">[exception]</InArgument>
                                   </Assign.Value>
                                 </Assign>
-                                <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_29" logLevel="DEBUG" logMsg="[systemError.Message]" />
+                                <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지 박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_3" MsgBoxButton="Ok" MsgBoxContent="[systemError.Message]" MsgBoxIcon="Confirm" MsgBoxTitle="Stop Process &gt;&gt; " />
                               </Sequence>
                             </ActivityAction>
                           </Catch>
@@ -226,7 +244,7 @@
                 <State.Transitions>
                   <Transition DisplayName="Error" sap2010:WorkflowViewState.IdRef="Transition_3" Condition="[systemError IsNot Nothing]">
                     <Transition.To>
-                      <State x:Name="__ReferenceID5" sap2010:Annotation.AnnotationText="오류 시 재시도 횟수를 체크하여 재시도or종료 처리" DisplayName="Error Handling" sap2010:WorkflowViewState.IdRef="State_2">
+                      <State x:Name="__ReferenceID6" sap2010:Annotation.AnnotationText="오류 시 재시도 횟수를 체크하여 재시도or종료 처리" DisplayName="Error Handling" sap2010:WorkflowViewState.IdRef="State_2">
                         <State.Entry>
                           <antbot:IfThenCodeActivity Condition="[retryCnt &gt; 0]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_5">
                             <ActivityAction>
@@ -248,7 +266,7 @@
                         <State.Transitions>
                           <Transition DisplayName="End Processing" sap2010:WorkflowViewState.IdRef="Transition_1" Condition="[retryCnt = 0 Or systemError IsNot Nothing]">
                             <Transition.To>
-                              <State x:Name="__ReferenceID6" sap2010:Annotation.AnnotationText="RPA 프로세스가 종료됩니다." DisplayName="FinalState" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+                              <State x:Name="__ReferenceID7" sap2010:Annotation.AnnotationText="RPA 프로세스가 종료됩니다." DisplayName="FinalState" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
                                 <State.Entry>
                                   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_26">
                                     <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="LOG출력" sap2010:WorkflowViewState.IdRef="LogCodeActivity_23" logLevel="DEBUG" logMsg="FinalState &gt;&gt;" />
@@ -311,122 +329,150 @@
                   </Transition>
                   <Transition DisplayName="Processing" sap2010:WorkflowViewState.IdRef="Transition_16" Condition="[systemError Is Nothing]">
                     <Transition.To>
-                      <State x:Name="__ReferenceID8" sap2010:Annotation.AnnotationText="RPA 본 업무가 수행되는 영역입니다." DisplayName="Business Workflow" sap2010:WorkflowViewState.IdRef="State_8">
+                      <State x:Name="__ReferenceID9" sap2010:Annotation.AnnotationText="RPA 본 업무가 수행되는 영역입니다." DisplayName="Business Workflow" sap2010:WorkflowViewState.IdRef="State_8">
                         <State.Entry>
-                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_36">
-                            <Sequence DisplayName="전역변수 초기화" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                              <Assign sap2010:WorkflowViewState.IdRef="Assign_31">
-                                <Assign.To>
-                                  <OutArgument x:TypeArguments="scg:List(x:String)">[lst오더번호]</OutArgument>
-                                </Assign.To>
-                                <Assign.Value>
-                                  <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of string)]</InArgument>
-                                </Assign.Value>
-                              </Assign>
-                              <Assign sap2010:WorkflowViewState.IdRef="Assign_32">
-                                <Assign.To>
-                                  <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[dic_다수번호매핑]</OutArgument>
-                                </Assign.To>
-                                <Assign.Value>
-                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[New Dictionary(Of string, string)]</InArgument>
-                                </Assign.Value>
-                              </Assign>
-                            </Sequence>
-                            <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_4">
-                              <TryCatch.Try>
-                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_14">
-                                  <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="LOG출력" sap2010:WorkflowViewState.IdRef="LogCodeActivity_17" logLevel="DEBUG" logMsg="Business Workflow  &gt;&gt;" />
-                                  <Flowchart DisplayName="물품검사번호매핑" sap2010:WorkflowViewState.IdRef="Flowchart_1">
-                                    <Flowchart.StartNode>
-                                      <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_1">
-                                        <Sequence DisplayName="SRM접속 및 로그인" sap2010:WorkflowViewState.IdRef="Sequence_30">
-                                          <antbot:ExecuteXamlWorkflowCodeActivity sap2010:Annotation.AnnotationText="conf = conf" DisplayName="실행하기-Workflow - LoginSRM.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_13" WorkflowPath="Process\LoginSRM.xaml">
-                                            <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_conf">[conf]</InArgument>
-                                            </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                          </antbot:ExecuteXamlWorkflowCodeActivity>
-                                        </Sequence>
-                                        <FlowStep.Next>
-                                          <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_2">
-                                            <Sequence DisplayName="검사요청목록 가져오기" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                                              <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 검사요청목록.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_14" WorkflowPath="Process\물품검사매핑\검사요청목록.xaml">
-                                                <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_conf">[conf]</InArgument>
-                                                  <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_Lst오더번호">[lst오더번호]</OutArgument>
-                                                </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                              </antbot:ExecuteXamlWorkflowCodeActivity>
-                                            </Sequence>
-                                            <FlowStep.Next>
-                                              <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_3">
-                                                <Sequence DisplayName="품질검사 번호매핑" sap2010:WorkflowViewState.IdRef="Sequence_32">
-                                                  <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 번호매핑.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_15" WorkflowPath="Process\물품검사매핑\번호매핑.xaml">
-                                                    <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_conf">[conf]</InArgument>
-                                                      <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Lst오더번호">[lst오더번호]</InArgument>
-                                                      <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="out_Dic_다수번호매핑">[dic_다수번호매핑]</OutArgument>
-                                                    </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                                  </antbot:ExecuteXamlWorkflowCodeActivity>
-                                                </Sequence>
-                                                <FlowStep.Next>
-                                                  <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_4">
-                                                    <Sequence DisplayName="품질검사 다수번호매핑" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                                                      <antbot:IfThenCodeActivity Condition="[Dic_다수번호매핑.Count &lt;&gt; 0]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_8">
-                                                        <ActivityAction>
-                                                          <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 다수번호매핑.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_16" WorkflowPath="Process\물품검사매핑\다수번호매핑.xaml">
-                                                            <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_conf">[conf]</InArgument>
-                                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_Dic_다수번호매핑">[dic_다수번호매핑]</InArgument>
-                                                            </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
-                                                          </antbot:ExecuteXamlWorkflowCodeActivity>
-                                                        </ActivityAction>
-                                                      </antbot:IfThenCodeActivity>
-                                                    </Sequence>
-                                                  </FlowStep>
-                                                </FlowStep.Next>
-                                              </FlowStep>
-                                            </FlowStep.Next>
-                                          </FlowStep>
-                                        </FlowStep.Next>
-                                      </FlowStep>
-                                    </Flowchart.StartNode>
-                                    <x:Reference>__ReferenceID1</x:Reference>
-                                    <x:Reference>__ReferenceID2</x:Reference>
-                                    <x:Reference>__ReferenceID3</x:Reference>
-                                    <x:Reference>__ReferenceID4</x:Reference>
-                                  </Flowchart>
+                          <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                            <TryCatch.Try>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_48">
+                                <Sequence DisplayName="변수 초기화" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                  <Assign sap2010:WorkflowViewState.IdRef="Assign_34">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="scg:List(x:String)">[lst오더번호]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of string)]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
                                 </Sequence>
-                              </TryCatch.Try>
-                              <TryCatch.Catches>
-                                <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_4">
-                                  <ActivityAction x:TypeArguments="s:Exception">
-                                    <ActivityAction.Argument>
-                                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                    </ActivityAction.Argument>
-                                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_22">
-                                      <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
-                                        <Assign.To>
-                                          <OutArgument x:TypeArguments="s:Exception">[systemError]</OutArgument>
-                                        </Assign.To>
-                                        <Assign.Value>
-                                          <InArgument x:TypeArguments="s:Exception">[exception]</InArgument>
-                                        </Assign.Value>
-                                      </Assign>
-                                      <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_27" logLevel="DEBUG" logMsg="[systemError.Message]" />
-                                    </Sequence>
-                                  </ActivityAction>
-                                </Catch>
-                              </TryCatch.Catches>
-                            </TryCatch>
-                          </Sequence>
+                                <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="LOG출력" sap2010:WorkflowViewState.IdRef="LogCodeActivity_33" logLevel="DEBUG" logMsg="Business Workflow  &gt;&gt;" />
+                                <Flowchart DisplayName="물품검사번호매핑" sap2010:WorkflowViewState.IdRef="Flowchart_2">
+                                  <Flowchart.StartNode>
+                                    <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+                                      <Sequence DisplayName="SRM접속 및 로그인" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                        <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - LoginSRM.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_19" WorkflowPath="Process\LoginSRM.xaml">
+                                          <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_conf">[conf]</InArgument>
+                                          </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                        </antbot:ExecuteXamlWorkflowCodeActivity>
+                                      </Sequence>
+                                      <FlowStep.Next>
+                                        <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                                          <Sequence DisplayName="검사요청목록 가져오기" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                                            <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 검사요청목록.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_20" WorkflowPath="Process\물품검사매핑\검사요청목록.xaml">
+                                              <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                                <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_Lst오더번호">[lst오더번호]</OutArgument>
+                                              </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                            </antbot:ExecuteXamlWorkflowCodeActivity>
+                                          </Sequence>
+                                          <FlowStep.Next>
+                                            <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                                              <Sequence DisplayName="물품검사 번호매핑" sap2010:WorkflowViewState.IdRef="Sequence_45">
+                                                <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 번호매핑.xaml" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_21" WorkflowPath="Process\물품검사매핑\물품검사매핑.xaml">
+                                                  <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                                    <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_Lst오더번호">[lst오더번호]</InArgument>
+                                                    <OutArgument x:TypeArguments="x:Int32" x:Key="out_물품검사미처리">[int_물품검사미처리]</OutArgument>
+                                                  </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                                </antbot:ExecuteXamlWorkflowCodeActivity>
+                                              </Sequence>
+                                              <FlowStep.Next>
+                                                <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                                                  <Sequence DisplayName="사전검사 번호매핑" sap2010:WorkflowViewState.IdRef="Sequence_46">
+                                                    <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_22" WorkflowPath="Process\물품검사매핑\사전검사매핑.xaml">
+                                                      <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                                        <InArgument x:TypeArguments="x:Int32" x:Key="in_물품검사미처리">[int_물품검사미처리]</InArgument>
+                                                        <OutArgument x:TypeArguments="x:Int32" x:Key="int_사전검사미처리">[int_사전검사미처리]</OutArgument>
+                                                      </antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
+                                                    </antbot:ExecuteXamlWorkflowCodeActivity>
+                                                  </Sequence>
+                                                  <FlowStep.Next>
+                                                    <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_11">
+                                                      <Sequence DisplayName="실행결과 출력" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                                                        <Sequence.Variables>
+                                                          <Variable x:TypeArguments="x:String" Name="messageTitle" />
+                                                          <Variable x:TypeArguments="x:String" Name="messageContent" />
+                                                        </Sequence.Variables>
+                                                        <Assign sap2010:WorkflowViewState.IdRef="Assign_37">
+                                                          <Assign.To>
+                                                            <OutArgument x:TypeArguments="x:String">[messageTitle]</OutArgument>
+                                                          </Assign.To>
+                                                          <Assign.Value>
+                                                            <InArgument x:TypeArguments="x:String">["물품검사번호매핑 RPA수행 결과"]</InArgument>
+                                                          </Assign.Value>
+                                                        </Assign>
+                                                        <Assign sap2010:WorkflowViewState.IdRef="Assign_38">
+                                                          <Assign.To>
+                                                            <OutArgument x:TypeArguments="x:String">[messageContent]</OutArgument>
+                                                          </Assign.To>
+                                                          <Assign.Value>
+                                                            <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;미처리 내역&gt;" + vbNewLine +
+"물품검사  " + int_물품검사미처리.ToString +"건" + vbNewLine +
+"사전검사  " + int_사전검사미처리.ToString + "건"]</InArgument>
+                                                          </Assign.Value>
+                                                        </Assign>
+                                                        <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_35" logLevel="DEBUG" logMsg="[messageContent]" />
+                                                        <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_7" MsgBoxButton="Ok" MsgBoxContent="[messageContent]" MsgBoxIcon="Confirm" MsgBoxTitle="[messageTitle]" />
+                                                      </Sequence>
+                                                    </FlowStep>
+                                                  </FlowStep.Next>
+                                                </FlowStep>
+                                              </FlowStep.Next>
+                                            </FlowStep>
+                                          </FlowStep.Next>
+                                        </FlowStep>
+                                      </FlowStep.Next>
+                                    </FlowStep>
+                                  </Flowchart.StartNode>
+                                  <x:Reference>__ReferenceID1</x:Reference>
+                                  <x:Reference>__ReferenceID2</x:Reference>
+                                  <x:Reference>__ReferenceID3</x:Reference>
+                                  <x:Reference>__ReferenceID4</x:Reference>
+                                  <x:Reference>__ReferenceID5</x:Reference>
+                                </Flowchart>
+                              </Sequence>
+                            </TryCatch.Try>
+                            <TryCatch.Catches>
+                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_6">
+                                <ActivityAction x:TypeArguments="s:Exception">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                  </ActivityAction.Argument>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_49">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="StringTitle" />
+                                    </Sequence.Variables>
+                                    <Assign sap2010:WorkflowViewState.IdRef="Assign_35">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="s:Exception">[systemError]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="s:Exception">[exception]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <Assign sap2010:WorkflowViewState.IdRef="Assign_36">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[StringTitle]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">["물품검사매핑RPA 에러팝업"]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_34" logLevel="DEBUG" logMsg="[systemError.Message]" />
+                                    <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지 박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_6" MsgBoxButton="Ok" MsgBoxContent="[systemError.Message]" MsgBoxIcon="Confirm" MsgBoxTitle="[StringTitle]" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </Catch>
+                            </TryCatch.Catches>
+                          </TryCatch>
                         </State.Entry>
                         <State.Transitions>
-                          <Transition DisplayName="Error" sap2010:WorkflowViewState.IdRef="Transition_14" To="{x:Reference __ReferenceID5}" Condition="[systemError IsNot Nothing]" />
-                          <Transition DisplayName="Processing" sap2010:WorkflowViewState.IdRef="Transition_15" To="{x:Reference __ReferenceID6}" Condition="[systemError Is Nothing]" />
+                          <Transition DisplayName="Error" sap2010:WorkflowViewState.IdRef="Transition_14" To="{x:Reference __ReferenceID6}" Condition="[systemError IsNot Nothing]" />
+                          <Transition DisplayName="Processing" sap2010:WorkflowViewState.IdRef="Transition_15" To="{x:Reference __ReferenceID7}" Condition="[systemError Is Nothing]" />
                         </State.Transitions>
                         <State.Variables>
                           <Variable x:TypeArguments="scg:List(x:String)" Name="Lst오더번호" />
                           <Variable x:TypeArguments="x:Boolean" Name="loginFail" />
-                          <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="Dic_다수번호매핑" />
+                          <Variable x:TypeArguments="x:Int32" Name="int_물품검사미처리" />
+                          <Variable x:TypeArguments="x:Int32" Name="int_사전검사미처리" />
                         </State.Variables>
                       </State>
                     </Transition.To>
@@ -435,15 +481,15 @@
               </State>
             </Transition.To>
           </Transition>
-          <Transition DisplayName="Config Error" sap2010:WorkflowViewState.IdRef="Transition_18" To="{x:Reference __ReferenceID6}" Condition="[systemError isNot Nothing]" />
+          <Transition DisplayName="Config Error" sap2010:WorkflowViewState.IdRef="Transition_18" To="{x:Reference __ReferenceID7}" Condition="[systemError isNot Nothing]" />
         </State.Transitions>
       </State>
     </StateMachine.InitialState>
-    <x:Reference>__ReferenceID7</x:Reference>
-    <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID8</x:Reference>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID9</x:Reference>
+    <x:Reference>__ReferenceID7</x:Reference>
     <x:Reference>__ReferenceID6</x:Reference>
-    <x:Reference>__ReferenceID5</x:Reference>
     <StateMachine.Variables>
       <Variable x:TypeArguments="x:String" Name="projectPath" />
       <Variable x:TypeArguments="x:String" Name="configExcel" />
@@ -454,12 +500,25 @@
       <Variable x:TypeArguments="s:String[]" Name="stopProcesses" />
       <Variable x:TypeArguments="x:Int32" Name="index" />
     </StateMachine.Variables>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </StateMachine>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_17" sap:VirtualizedContainerService.HintSize="418,89" />
-      <sap2010:ViewStateData Id="SpecialKeyInActivity_1" sap:VirtualizedContainerService.HintSize="314,109">
+      <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_5" sap:VirtualizedContainerService.HintSize="498,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_32" sap:VirtualizedContainerService.HintSize="273,92" />
+      <sap2010:ViewStateData Id="TerminateWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="498,238" />
+      <sap2010:ViewStateData Id="Sequence_40" sap:VirtualizedContainerService.HintSize="418,50">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_17" sap:VirtualizedContainerService.HintSize="520,89" />
+      <sap2010:ViewStateData Id="CommentOut_6" sap:VirtualizedContainerService.HintSize="418,50" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_1" sap:VirtualizedContainerService.HintSize="314,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -488,7 +547,7 @@
       <sap2010:ViewStateData Id="CommentOut_4" sap:VirtualizedContainerService.HintSize="314,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -511,23 +570,23 @@
       <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="Assign_26" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,1575">
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,1516">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="273,60" />
-      <sap2010:ViewStateData Id="LogCodeActivity_30" sap:VirtualizedContainerService.HintSize="273,92" />
-      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="295,313">
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="264,284">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="404,381">
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="400,20">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -535,11 +594,12 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="418,2262" />
-      <sap2010:ViewStateData Id="Sequence_35" sap:VirtualizedContainerService.HintSize="440,2515">
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="418,1738" />
+      <sap2010:ViewStateData Id="Sequence_35" sap:VirtualizedContainerService.HintSize="440,2042">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -553,31 +613,23 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
       <sap2010:ViewStateData Id="IfThenCodeActivity_7" sap:VirtualizedContainerService.HintSize="314,163" />
-      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="336,570">
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="336,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="273,60" />
-      <sap2010:ViewStateData Id="LogCodeActivity_29" sap:VirtualizedContainerService.HintSize="273,92" />
-      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="295,313">
+      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="264,284">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_5" sap:VirtualizedContainerService.HintSize="404,20">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_5" sap:VirtualizedContainerService.HintSize="418,896">
+      <sap2010:ViewStateData Id="Catch`1_5" sap:VirtualizedContainerService.HintSize="400,352">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -585,19 +637,27 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="434,1037" />
-      <sap2010:ViewStateData Id="LogCodeActivity_22" sap:VirtualizedContainerService.HintSize="269,82" />
-      <sap2010:ViewStateData Id="Assign_20" sap:VirtualizedContainerService.HintSize="269,60" />
-      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="269,22" />
-      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="291,368">
+      <sap2010:ViewStateData Id="TryCatch_5" sap:VirtualizedContainerService.HintSize="414,510">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="430,691" />
+      <sap2010:ViewStateData Id="LogCodeActivity_22" sap:VirtualizedContainerService.HintSize="273,92" />
+      <sap2010:ViewStateData Id="Assign_20" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="273,22" />
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="295,378">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="IfThenCodeActivity_5" sap:VirtualizedContainerService.HintSize="307,511" />
-      <sap2010:ViewStateData Id="LogCodeActivity_23" sap:VirtualizedContainerService.HintSize="586,92" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_5" sap:VirtualizedContainerService.HintSize="311,519" />
+      <sap2010:ViewStateData Id="LogCodeActivity_23" sap:VirtualizedContainerService.HintSize="564,92" />
       <sap2010:ViewStateData Id="LogCodeActivity_26" sap:VirtualizedContainerService.HintSize="337,92" />
       <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="200,50" />
       <sap2010:ViewStateData Id="EmailSendToOutlookCodeActivity_2" sap:VirtualizedContainerService.HintSize="337,178" />
@@ -610,17 +670,18 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="CommentOut_3" sap:VirtualizedContainerService.HintSize="200,50" />
-      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="222,354">
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="LogCodeActivity_28" sap:VirtualizedContainerService.HintSize="323,92" />
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="570,500" />
-      <sap2010:ViewStateData Id="IfThenCodeActivity_6" sap:VirtualizedContainerService.HintSize="586,641" />
-      <sap2010:ViewStateData Id="Sequence_26" sap:VirtualizedContainerService.HintSize="608,897">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="548,238" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_6" sap:VirtualizedContainerService.HintSize="564,379" />
+      <sap2010:ViewStateData Id="Sequence_26" sap:VirtualizedContainerService.HintSize="586,635">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -687,25 +748,23 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_32" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_33" sap:VirtualizedContainerService.HintSize="654,284">
+      <sap2010:ViewStateData Id="Assign_34" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_42" sap:VirtualizedContainerService.HintSize="614,184">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LogCodeActivity_17" sap:VirtualizedContainerService.HintSize="614,92" />
-      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_13" sap:VirtualizedContainerService.HintSize="314,111">
+      <sap2010:ViewStateData Id="LogCodeActivity_33" sap:VirtualizedContainerService.HintSize="614,92" />
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_19" sap:VirtualizedContainerService.HintSize="314,89">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_30" sap:VirtualizedContainerService.HintSize="200,50">
+      <sap2010:ViewStateData Id="Sequence_43" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -713,40 +772,59 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_14" sap:VirtualizedContainerService.HintSize="314,89" />
-      <sap2010:ViewStateData Id="Sequence_31" sap:VirtualizedContainerService.HintSize="200,50">
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_20" sap:VirtualizedContainerService.HintSize="314,89" />
+      <sap2010:ViewStateData Id="Sequence_44" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_15" sap:VirtualizedContainerService.HintSize="314,89" />
-      <sap2010:ViewStateData Id="Sequence_32" sap:VirtualizedContainerService.HintSize="200,50">
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_21" sap:VirtualizedContainerService.HintSize="314,89" />
+      <sap2010:ViewStateData Id="Sequence_45" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_16" sap:VirtualizedContainerService.HintSize="314,89" />
-      <sap2010:ViewStateData Id="IfThenCodeActivity_8" sap:VirtualizedContainerService.HintSize="330,230" />
-      <sap2010:ViewStateData Id="Sequence_34" sap:VirtualizedContainerService.HintSize="200,50">
+      <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_22" sap:VirtualizedContainerService.HintSize="314,89" />
+      <sap2010:ViewStateData Id="Sequence_46" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_4">
+      <sap2010:ViewStateData Id="Assign_37" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="273,62" />
+      <sap2010:ViewStateData Id="LogCodeActivity_35" sap:VirtualizedContainerService.HintSize="273,92" />
+      <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_7" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="Sequence_50" sap:VirtualizedContainerService.HintSize="295,518">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">200,407.5</av:Point>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,497.5</av:Point>
             <av:Size x:Key="ShapeSize">200,50</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_3">
+      <sap2010:ViewStateData Id="FlowStep_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,407.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,50</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,457.5 300,497.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_7">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,317.5</av:Point>
@@ -755,7 +833,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_2">
+      <sap2010:ViewStateData Id="FlowStep_8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,227.5</av:Point>
@@ -764,7 +842,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_1">
+      <sap2010:ViewStateData Id="FlowStep_9">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,137.5</av:Point>
@@ -773,7 +851,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,636">
+      <sap2010:ViewStateData Id="Flowchart_2" sap:VirtualizedContainerService.HintSize="614,636">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -784,23 +862,25 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="636,892">
+      <sap2010:ViewStateData Id="Sequence_48" sap:VirtualizedContainerService.HintSize="636,1116">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="273,60" />
-      <sap2010:ViewStateData Id="LogCodeActivity_27" sap:VirtualizedContainerService.HintSize="273,92" />
-      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="295,316">
+      <sap2010:ViewStateData Id="Assign_35" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="Assign_36" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="LogCodeActivity_34" sap:VirtualizedContainerService.HintSize="273,92" />
+      <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_6" sap:VirtualizedContainerService.HintSize="273,60" />
+      <sap2010:ViewStateData Id="Sequence_49" sap:VirtualizedContainerService.HintSize="295,513">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_4" sap:VirtualizedContainerService.HintSize="640,384">
+      <sap2010:ViewStateData Id="Catch`1_6" sap:VirtualizedContainerService.HintSize="640,20">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -808,14 +888,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_4" sap:VirtualizedContainerService.HintSize="654,1582" />
-      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="676,2030">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_6" sap:VirtualizedContainerService.HintSize="654,1338" />
       <sap2010:ViewStateData Id="Transition_14" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -834,7 +907,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="702,2436">
+      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="680,1744">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">100.4,489.3</av:Point>
@@ -870,7 +943,7 @@
       <sap2010:ViewStateData Id="Transition_17" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">190.3,264.7 190.3,328.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">190,258.5 190,288.5 190.3,288.5 190.3,328.5</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">39</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">38</x:Int32>
           </scg:Dictionary>
@@ -879,19 +952,19 @@
       <sap2010:ViewStateData Id="Transition_18" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">98.8,217.2 68.8,217.2 68.8,689.6 97.2,689.6</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">95.5,210 65.5,210 65.5,688.6 97.2,688.6</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">37</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">37</x:Int32>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_10" sap:VirtualizedContainerService.HintSize="183,97">
+      <sap2010:ViewStateData Id="State_10" sap:VirtualizedContainerService.HintSize="189,97">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">98.8,167.7</av:Point>
-            <av:Size x:Key="ShapeSize">183,97</av:Size>
+            <av:Point x:Key="ShapeLocation">95.5,161.5</av:Point>
+            <av:Size x:Key="ShapeSize">189,97</av:Size>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Double x:Key="StateContainerWidth">169</x:Double>
+            <x:Double x:Key="StateContainerWidth">175</x:Double>
             <x:Double x:Key="StateContainerHeight">25</x:Double>
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
@@ -904,7 +977,7 @@
             <av:Point x:Key="ShapeLocation">160,42.5</av:Point>
             <x:Double x:Key="StateContainerWidth">600</x:Double>
             <x:Double x:Key="StateContainerHeight">784.00000000000023</x:Double>
-            <av:PointCollection x:Key="ConnectorLocation">190,117.5 190,147.5 190.3,147.5 190.3,167.7</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">190,117.5 190,161.5</av:PointCollection>
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -912,7 +985,7 @@
       <sap2010:ViewStateData Id="ktds.AntBot.Studio.TemplateWorkflow.Flowchart_1" sap:VirtualizedContainerService.HintSize="654,950">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>

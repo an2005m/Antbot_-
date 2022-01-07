@@ -88,14 +88,14 @@
         </Assign.Value>
       </Assign>
       <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="[&quot;바탕화면 경로&gt;&gt;&gt;&quot; + desktopPath]" />
-      <antbot:GetFilesCodeActivity DisplayName="파일목록 가져오기" FileNamePattern="*.xls" FileNames="[getOrderFile]" sap2010:WorkflowViewState.IdRef="GetFilesCodeActivity_1" InFolder="[desktopPath + &quot;\납품서등록(RPA)&quot;]" Relative="True" />
     </Sequence>
-    <antbot:IfThenCodeActivity Condition="[getOrderFile.Length = 0]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_1">
+    <antbot:GetFilesCodeActivity DisplayName="파일목록 가져오기" FileNamePattern="*.xls" FileNames="[getOrderFile]" sap2010:WorkflowViewState.IdRef="GetFilesCodeActivity_1" InFolder="[desktopPath + &quot;\납품서등록(RPA)&quot;]" Relative="True" />
+    <antbot:IfThenCodeActivity sap2010:Annotation.AnnotationText="납품서등록(RPA)폴더에 매핑작업 엑셀파일이 0일 경우 에러 발생" Condition="[getOrderFile.Length = 0]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_1">
       <ActivityAction>
         <Throw Exception="[New Exception(&quot;업로드 엑셀파일이 존재하지 않습니다.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
       </ActivityAction>
     </antbot:IfThenCodeActivity>
-    <antbot:IfThenCodeActivity Condition="[Not getOrderFile.Length = 1]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_2">
+    <antbot:IfThenCodeActivity sap2010:Annotation.AnnotationText="납품서등록(RPA)폴더에 매핑작업 엑셀파일이 2개이상일 경우 에러 발생" Condition="[Not getOrderFile.Length = 1]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_2">
       <ActivityAction>
         <Throw Exception="[New Exception(&quot;업로드 엑셀파일이 여러개 입니다. &quot; + in_GetFileFolderName + &quot;폴더의 파일을 확인해주세요.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
       </ActivityAction>
@@ -118,7 +118,7 @@
             <Variable x:TypeArguments="sco:Collection(x:String)" Name="getSheet" />
           </Sequence.Variables>
           <antbot:ExcelSheetListCodeActivity DisplayName="엑셀시트 목록 가져오기" sap2010:WorkflowViewState.IdRef="ExcelSheetListCodeActivity_1" SheetNameList="[getSheet]" />
-          <antbot:IfThenCodeActivity Condition="[Not getSheet.Count = 1]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_3">
+          <antbot:IfThenCodeActivity sap2010:Annotation.AnnotationText="엑셀파일의 시트가 2개 이상일 경우 에러 발생" Condition="[Not getSheet.Count = 1]" DisplayName="If Then" sap2010:WorkflowViewState.IdRef="IfThenCodeActivity_3">
             <ActivityAction>
               <Throw Exception="[New Exception(&quot;엑셀파일의 Sheet가 여러개 입니다. 작업 Sheet를 확인해 주세요.&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
             </ActivityAction>
@@ -136,7 +136,7 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("구매오더번호").tostring]</InArgument>
       </Assign.Value>
     </Assign>
-    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;구매오더번호&gt;&gt;&gt;&quot; + out_OderNum]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_6" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_6" logLevel="DEBUG" logMsg="[&quot;구매오더번호&gt;&gt;&gt;&quot; + out_OderNum]" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_자재코드]</OutArgument>
@@ -145,7 +145,7 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("자재코드").tostring]</InArgument>
       </Assign.Value>
     </Assign>
-    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;자재코드&gt;&gt;&gt;&quot; + out_자재코드]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_7" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_7" logLevel="DEBUG" logMsg="[&quot;자재코드&gt;&gt;&gt;&quot; + out_자재코드]" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_StartBarcodeNum]</OutArgument>
@@ -154,7 +154,7 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(0)("바코드번호").tostring]</InArgument>
       </Assign.Value>
     </Assign>
-    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;Start바코드 번호&gt;&gt;&gt;&quot; + out_StartBarcodeNum]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_8" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_8" logLevel="DEBUG" logMsg="[&quot;Start바코드 번호&gt;&gt;&gt;&quot; + out_StartBarcodeNum]" />
     <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_EndBarcodeNum]</OutArgument>
@@ -163,40 +163,58 @@
         <InArgument x:TypeArguments="x:String">[dt_작업.Rows(dt_작업.Rows.Count-1)("바코드번호").tostring]</InArgument>
       </Assign.Value>
     </Assign>
-    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" logLevel="DEBUG" logMsg="[&quot;End바코드 번호&gt;&gt;&gt;&quot; + out_EndBarcodeNum]" sap2010:WorkflowViewState.IdRef="LogCodeActivity_9" />
+    <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_9" logLevel="DEBUG" logMsg="[&quot;End바코드 번호&gt;&gt;&gt;&quot; + out_EndBarcodeNum]" />
     <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_5" logLevel="DEBUG" logMsg="================엑셀파일 데이터 가져오기 종료==================" />
-    <sads:DebugSymbol.Symbol>d4cBQzpcVXNlcnNcVVNFUlxEZXNrdG9wXO2MjO2KuOuEiOuPmeuwmOyEseyepe2MgCBSUEHqs7zsl4Vc66y87J6Q7JeF66y0IOyekOuPme2ZlF/thYzsiqTtirhcUHJvY2Vzc1zrgqntkojshJzrk7HroZ1cR2V0RXhjZWxGaWxlRGF0YS54YW1sPUoDqQEOAgEBUAVQygECAVBRBVwQAgFCXQVhIQIBPWIFZiECAThnBW4OAgE0bwWBASQCASKCAQWCAc4BAgEggwEFigEOAgEciwEFiwHGAQIBGYwBBZMBDgIBFZQBBZQBwQECARKVAQWcAQ4CAQ6dAQWdAdMBAgELngEFpQEOAgEHpgEFpgHPAQIBBKcBBacBygECAQJQkwFQxwECAVFSB1kQAgFMWgdayQECAUlbB1vtAQIBQ10qXUUCAUBfCV96AgE+YipiSQIBO2QJZK4BAgE5bDBscgIBN2kxaUMCATVvlwFvqwECATJ0CX8UAgEjggGTAYIBywECASGIATCIAVICAR+FATGFAT4CAR2LAV+LAY8BAgEakQEwkQFQAgEYjgExjgE7AgEWlAFflAGKAQIBE5oBMJoBUQIBEZcBMZcBRgIBD50BX50BnAECAQyjATCjAWICAQqgATGgAUQCAQimAV+mAZgBAgEFpwGTAacBxwECAQNXMldwAgFPVDNUQAIBTVqVAVrGAQIBSluxAVvaAQIBR1tMW1MCAUZbXltuAgFEXxpfTQIBP2QaZIEBAgE6eAt4pQECAS95C30nAgEqfgt+rgICASR4lgF4ogECATB5MHlKAgEtew97lAECASt+iAJ+kQICASh+nAJ+qwICASZ+jAF+kQECASV7IHtnAgEs</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d2NDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc66y87J6Q7JeF66y0IOyekOuPme2ZlFxQcm9jZXNzXOuCqe2SiOyEnOuTseuhnVxHZXRFeGNlbEZpbGVEYXRhLnhhbWw9SgOpAQ4CAQFQBVDKAQIBUFEFWxACAUhcBVzrAQIBQl0FYSECAT1iBWYhAgE4ZwVuDgIBNG8FgQEkAgEiggEFggHOAQIBIIMBBYoBDgIBHIsBBYsBxgECARmMAQWTAQ4CARWUAQWUAcEBAgESlQEFnAEOAgEOnQEFnQHTAQIBC54BBaUBDgIBB6YBBaYBzwECAQSnAQWnAcoBAgECUJMBUMcBAgFRUgdZEAIBTFoHWskBAgFJXK8BXNgBAgFGXEpcUQIBRVxcXGwCAUNdc12OAQIBQF8JX3oCAT5idmKVAQIBO2QJZK4BAgE5bDBscgIBN2kxaUMCATVvlwFvqwECATJ0CX8UAgEjggGTAYIBywECASGIATCIAVICAR+FATGFAT4CAR2LAZMBiwHDAQIBGpEBMJEBUAIBGI4BMY4BOwIBFpQBkwGUAb4BAgETmgEwmgFRAgERlwExlwFGAgEPnQGTAZ0B0AECAQyjATCjAWICAQqgATGgAUQCAQimAZMBpgHMAQIBBacBkwGnAccBAgEDVzJXcAIBT1QzVEACAU1alQFaxgECAUpfGl9NAgE/ZBpkgQECATp4C3ilAQIBL3kLfScCASp+C36uAgIBJHiWAXiiAQIBMHlueYgBAgEtew97lAECASt+iAJ+kQICASh+nAJ+qwICASZ+jAF+kQECASV7IHtnAgEs</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="LogCodeActivity_1" sap:VirtualizedContainerService.HintSize="326,92" />
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="274,60" />
       <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="274,92" />
-      <sap2010:ViewStateData Id="GetFilesCodeActivity_1" sap:VirtualizedContainerService.HintSize="274,22" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="326,378">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="326,316">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetFilesCodeActivity_1" sap:VirtualizedContainerService.HintSize="326,22" />
       <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="326,163" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="326,199">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="IfThenCodeActivity_2" sap:VirtualizedContainerService.HintSize="326,163" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_2" sap:VirtualizedContainerService.HintSize="326,199">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="326,60" />
       <sap2010:ViewStateData Id="ExcelSheetListCodeActivity_1" sap:VirtualizedContainerService.HintSize="287,22" />
       <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="287,163" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_3" sap:VirtualizedContainerService.HintSize="287,199">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelReadCodeActivity_1" sap:VirtualizedContainerService.HintSize="287,89" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="309,478">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="309,514">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="326,584" />
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="326,620" />
       <sap2010:ViewStateData Id="LogCodeActivity_4" sap:VirtualizedContainerService.HintSize="326,92" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="326,60" />
       <sap2010:ViewStateData Id="LogCodeActivity_6" sap:VirtualizedContainerService.HintSize="326,92" />
@@ -207,14 +225,14 @@
       <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="326,60" />
       <sap2010:ViewStateData Id="LogCodeActivity_9" sap:VirtualizedContainerService.HintSize="326,92" />
       <sap2010:ViewStateData Id="LogCodeActivity_5" sap:VirtualizedContainerService.HintSize="326,92" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="348,2956">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="348,3064">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="388,3076" />
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="388,3144" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
