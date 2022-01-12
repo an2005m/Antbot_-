@@ -196,11 +196,13 @@
             <Variable x:TypeArguments="x:Int32" Name="int_RetryCnt" />
           </Sequence.Variables>
           <Sequence DisplayName="ID 입력" sap2010:WorkflowViewState.IdRef="Sequence_4">
-            <antbot:FinderAutoActivity DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonDblClick" ActivityActionType="찾기" DelayAfter="500" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;principal&quot; name=&quot;principal&quot; type=&quot;text&quot; placeholder=&quot;아이디&quot; tagname=&quot;input&quot; xpath=&quot;/html[1]/body[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/input[1]&quot; /&gt;" ElementPosition="317, 384" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_2" ImageFileName="Pe5ERyFrOQwDuVWNBZsx.png" OffsetX="77" OffsetY="18" ProcessName="chrome" Retry="3" WindowTitle="KT협력사포탈" />
+            <antbot:FinderAutoActivity DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonDblClick" ActivityActionType="찾기" DelayAfter="500" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;principal&quot; name=&quot;principal&quot; type=&quot;text&quot; placeholder=&quot;아이디&quot; tagname=&quot;input&quot; xpath=&quot;/html[1]/body[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/input[1]&quot; /&gt;&lt;Self id=&quot;principal&quot; name=&quot;principal&quot; type=&quot;text&quot; placeholder=&quot;아이디&quot; tagname=&quot;input&quot; xpath=&quot;/html[1]/body[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[1]/input[1]&quot; /&gt;" ElementPosition="317, 384" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_2" ImageFileName="Pe5ERyFrOQwDuVWNBZsx.png" OffsetX="77" OffsetY="18" ProcessName="chrome" Retry="3" WindowTitle="KT협력사포탈" />
+            <antbot:SpecialKeyInActivity MDelayMiliSec="{x:Null}" DelayAfter="500" DelayBefore="500" DisplayName="키보드입력-특수키" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="True" isShiftKey="False" isWinKey="False" spKey="a" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_2" />
             <antbot:KeyInActivity DelayAfter="{x:Null}" MDelayMiliSec="{x:Null}" DelayBefore="500" DirectInsert="True" DisplayName="키보드입력" sap2010:WorkflowViewState.IdRef="KeyInActivity_1" IgnoreDefaultDelayForKeyIn="False" KeyInText="[srm_Id]" />
           </Sequence>
           <Sequence DisplayName="Password 입력" sap2010:WorkflowViewState.IdRef="Sequence_5">
             <antbot:FinderAutoActivity DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonDblClick" ActivityActionType="찾기" DelayAfter="500" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;credential&quot; name=&quot;credential&quot; type=&quot;password&quot; placeholder=&quot;비밀번호&quot; tagname=&quot;input&quot; xpath=&quot;/html[1]/body[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[2]/input[1]&quot; /&gt;" ElementPosition="490, 430" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_4" ImageFileName="mYvNkOFdBnOjNp9SqTmK.png" OffsetX="77" OffsetY="18" ProcessName="chrome" Retry="3" WindowTitle="KT협력사포탈" />
+            <antbot:SpecialKeyInActivity MDelayMiliSec="{x:Null}" DelayAfter="500" DelayBefore="500" DisplayName="키보드입력-특수키" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="True" isShiftKey="False" isWinKey="False" spKey="a" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_3" />
             <antbot:SecurityKeyInCodeActivity DelayAfter="{x:Null}" MDelayMiliSec="{x:Null}" DelayBefore="500" DirectInsert="True" DisplayName="키보드입력-보안문자열" sap2010:WorkflowViewState.IdRef="SecurityKeyInCodeActivity_1" IgnoreDefaultDelayForKeyIn="False" KeyInText="[srm_Pwd]" />
           </Sequence>
           <antbot:InputWindowCodeActivity DisplayName="사용자 입력창" sap2010:WorkflowViewState.IdRef="InputWindowCodeActivity_1" MainText="[&quot;보안문자를 입력해 주세요.&quot; + vbNewLine + &quot;※대, 소문자 구분 필수※&quot;]" OutResult="[str_보안문자]" Title="알림" />
@@ -402,7 +404,7 @@
       </If.Else>
     </If>
     <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="=======================SRM접속 및 로그인 종료====================" />
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -435,7 +437,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="IfThenCodeActivity_8" sap:VirtualizedContainerService.HintSize="266,163" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_8" sap:VirtualizedContainerService.HintSize="887,163" />
       <sap2010:ViewStateData Id="Throw_7" sap:VirtualizedContainerService.HintSize="200,22" />
       <sap2010:ViewStateData Id="IfThenCodeActivity_13" sap:VirtualizedContainerService.HintSize="887,163" />
       <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
@@ -466,8 +468,9 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FinderAutoActivity_1" sap:VirtualizedContainerService.HintSize="887,210" />
       <sap2010:ViewStateData Id="FinderAutoActivity_2" sap:VirtualizedContainerService.HintSize="301,188" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_2" sap:VirtualizedContainerService.HintSize="301,109" />
       <sap2010:ViewStateData Id="KeyInActivity_1" sap:VirtualizedContainerService.HintSize="301,60" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="670,412">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="670,561">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -475,8 +478,9 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FinderAutoActivity_4" sap:VirtualizedContainerService.HintSize="301,188" />
+      <sap2010:ViewStateData Id="SpecialKeyInActivity_3" sap:VirtualizedContainerService.HintSize="301,109" />
       <sap2010:ViewStateData Id="SecurityKeyInCodeActivity_1" sap:VirtualizedContainerService.HintSize="301,22" />
-      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="670,374">
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="670,523">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -503,14 +507,14 @@
       <sap2010:ViewStateData Id="FinderAutoActivity_5" sap:VirtualizedContainerService.HintSize="670,188" />
       <sap2010:ViewStateData Id="KeyInActivity_3" sap:VirtualizedContainerService.HintSize="670,60" />
       <sap2010:ViewStateData Id="FinderAutoActivity_3" sap:VirtualizedContainerService.HintSize="670,210" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="692,2756">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="692,3054">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="887,2897" />
+      <sap2010:ViewStateData Id="IfThenCodeActivity_1" sap:VirtualizedContainerService.HintSize="887,3195" />
       <sap2010:ViewStateData Id="InvokeMethod_7" sap:VirtualizedContainerService.HintSize="218,127" />
       <sap2010:ViewStateData Id="InvokeMethod_8" sap:VirtualizedContainerService.HintSize="218,127" />
       <sap2010:ViewStateData Id="InvokeMethod_9" sap:VirtualizedContainerService.HintSize="218,127" />
@@ -599,14 +603,14 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="887,4466" />
       <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="887,92" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="909,10807">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="909,11105">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="949,10887" />
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="949,11185" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

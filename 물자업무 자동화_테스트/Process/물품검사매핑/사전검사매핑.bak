@@ -79,7 +79,7 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self type=&quot;text&quot; name=&quot;po_no&quot; size=&quot;20&quot; autocomplete=&quot;off&quot; aria-invalid=&quot;false&quot; role=&quot;textbox&quot; aria-describedby=&quot;ext-gen1109&quot; aria-required=&quot;false&quot; tagname=&quot;input&quot; classname=&quot;x-form-field x-form-text&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]&quot; /&gt;&lt;IFrame index=&quot;2&quot; /&gt;" ElementPosition="354, 278" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_1" ImageFileName="F4DCgY51eoacV2ECWnoM.png" OffsetX="385" OffsetY="12" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
+    <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DisplayName="Finder" ElementAttrXml="&lt;Self name=&quot;po_no&quot; size=&quot;20&quot; autocomplete=&quot;off&quot; aria-invalid=&quot;false&quot; role=&quot;textbox&quot; aria-required=&quot;false&quot; tagname=&quot;input&quot; classname=&quot;x-form-field x-form-text&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]&quot; /&gt;&lt;IFrame index=&quot;2&quot; /&gt;" ElementPosition="354, 278" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_1" ImageFileName="F4DCgY51eoacV2ECWnoM.png" OffsetX="385" OffsetY="12" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
     <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_1" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="True" isShiftKey="False" isWinKey="False" spKey="a" />
     <antbot:SpecialKeyInActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" MDelayMiliSec="{x:Null}" DisplayName="키보드입력-특수키" sap2010:WorkflowViewState.IdRef="SpecialKeyInActivity_2" IgnoreDefaultDelayForKeyIn="False" isAltKey="False" isCtrlKey="False" isShiftKey="False" isSpecialKey="True" isWinKey="False" spKey="DEL" />
     <antbot:FinderAutoActivity DelayAfter="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ResultElementText="{x:Null}" ActionType="LButtonClick" ActivityActionType="찾기" DelayBefore="500" DisplayName="Finder" ElementAttrXml="&lt;Self innertext=&quot;조회&quot; tagname=&quot;span&quot; classname=&quot;x-btn-inner search&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/em[1]/button[1]/span[1]&quot; /&gt;&lt;IFrame index=&quot;2&quot; /&gt;" ElementPosition="1724, 332" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_2" ImageFileName="AflPA0c4hANlS8Gc1B0U.png" OffsetX="25" OffsetY="9" ProcessName="chrome" Retry="3" WindowTitle="SMARTsuite Application" />
@@ -199,7 +199,7 @@
                           <Throw Exception="[New Exception(&quot;사전납품검사번호조회 화면 팝업 실패&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
                         </ActivityAction>
                       </antbot:IfThenCodeActivity>
-                      <antbot:FinderAutoActivity DelayAfter="{x:Null}" DelayBefore="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" DisplayName="Finder" ElementAttrXml="&lt;Self role=&quot;presentation&quot; tagname=&quot;div&quot; classname=&quot;x-box-inner&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]&quot; /&gt;&lt;IFrame index=&quot;3&quot; /&gt;" ElementPosition="1147, 753" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_6" ImageFileName="2xI6E4EiRBKR4meW1p5h.png" OffsetX="-1" OffsetY="-1" ProcessName="chrome" ResultElementText="[isNoSearchData]" Retry="3" WindowTitle="SMARTsuite Application" />
+                      <antbot:FinderAutoActivity DelayAfter="{x:Null}" FindResult="{x:Null}" FinderElement="{x:Null}" ResultElementImage="{x:Null}" ActionType="None" ActivityActionType="찾기" ClickSkip="True" DelayBefore="1000" DisplayName="Finder" ElementAttrXml="&lt;Self id=&quot;ext-gen1117&quot; xpath=&quot;/html[1]/body[1]/div[1]/div[1]/div[2]/div[3]/div[1]&quot; /&gt;&lt;IFrame index=&quot;3&quot; /&gt;" ElementPosition="1147, 753" FindAttrName="" FinderAutoType="Web" FinderScrollOption="Center" sap2010:WorkflowViewState.IdRef="FinderAutoActivity_6" ImageFileName="2xI6E4EiRBKR4meW1p5h.png" OffsetX="-1" OffsetY="-1" ProcessName="chrome" ResultElementText="[isNoSearchData]" Retry="3" WindowTitle="SMARTsuite Application" />
                       <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_8" logLevel="DEBUG" logMsg="[&quot;사전납품검사조회 건 수 &gt;&gt;&gt;&quot; + isNoSearchData]" />
                       <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
                         <Assign.To>
@@ -314,29 +314,33 @@
       </If.Else>
     </If>
     <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_2" logLevel="DEBUG" logMsg="===================사전검사 번호매핑 종료===================" />
-    <Sequence DisplayName="실행결과 출력" sap2010:WorkflowViewState.IdRef="Sequence_13">
-      <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[messageTitle]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String">["물품검사번호매핑 RPA수행 결과"]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[messageContent]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;검사유형별 미처리 내역&gt;" + vbNewLine +
+    <antbot:CommentOut DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <Sequence DisplayName="Ignored Activities">
+        <Sequence DisplayName="실행결과 출력" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[messageTitle]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">["물품검사번호매핑 RPA수행 결과"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[messageContent]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;검사유형별 미처리 내역&gt;" + vbNewLine +
 "물품검사  " + in_물품검사미처리.ToString +"건" + vbNewLine +
 "사전검사  " + int_사전검사미처리.ToString + "건"]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_14" logLevel="DEBUG" logMsg="[messageContent]" />
-      <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_1" MsgBoxButton="Ok" MsgBoxContent="[messageContent]" MsgBoxIcon="Confirm" MsgBoxTitle="[messageTitle]" />
-    </Sequence>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+            </Assign.Value>
+          </Assign>
+          <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_14" logLevel="DEBUG" logMsg="[messageContent]" />
+          <antbot:OpenMsgBoxCodeActivity MsgBoxChosenBtn="{x:Null}" DisplayName="메세지박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_1" MsgBoxButton="Ok" MsgBoxContent="[messageContent]" MsgBoxIcon="Confirm" MsgBoxTitle="[messageTitle]" />
+        </Sequence>
+      </Sequence>
+    </antbot:CommentOut>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -482,14 +486,15 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1497,9698">
+      <sap2010:ViewStateData Id="CommentOut_2" sap:VirtualizedContainerService.HintSize="1475,50" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1497,9230">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="1537,9778" />
+      <sap2010:ViewStateData Id="ktds.AntBot.Studio.Workflow_1" sap:VirtualizedContainerService.HintSize="1537,9310" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

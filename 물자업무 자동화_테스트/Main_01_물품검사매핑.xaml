@@ -800,7 +800,7 @@
       <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="273,62" />
       <sap2010:ViewStateData Id="LogCodeActivity_35" sap:VirtualizedContainerService.HintSize="273,92" />
       <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_7" sap:VirtualizedContainerService.HintSize="273,60" />
-      <sap2010:ViewStateData Id="Sequence_50" sap:VirtualizedContainerService.HintSize="295,518">
+      <sap2010:ViewStateData Id="Sequence_50" sap:VirtualizedContainerService.HintSize="200,50">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -873,7 +873,7 @@
       <sap2010:ViewStateData Id="Assign_36" sap:VirtualizedContainerService.HintSize="273,60" />
       <sap2010:ViewStateData Id="LogCodeActivity_34" sap:VirtualizedContainerService.HintSize="273,92" />
       <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_6" sap:VirtualizedContainerService.HintSize="273,60" />
-      <sap2010:ViewStateData Id="Sequence_49" sap:VirtualizedContainerService.HintSize="295,513">
+      <sap2010:ViewStateData Id="Sequence_49" sap:VirtualizedContainerService.HintSize="295,516">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -907,7 +907,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="179,97">
+      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="680,1744">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">100.4,489.3</av:Point>
@@ -958,7 +958,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_10" sap:VirtualizedContainerService.HintSize="568,2860">
+      <sap2010:ViewStateData Id="State_10" sap:VirtualizedContainerService.HintSize="189,97">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">95.5,161.5</av:Point>
