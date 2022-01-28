@@ -1,0 +1,14 @@
+<Project>
+  <Name>물자업무 자동화_테스트</Name>
+  <Main>Main_01_물품검사매핑.xaml</Main>
+  <Desc>물자업무 자동화_테스트</Desc>
+  <Key>fcGlBheXkYkGMis6Ho9bCnfpqp7EkB5Sa51TEoMATJQb9oQxY8st5SfGXv5wgHmGcZHBjCitvLl2G3MIsrlsBw==</Key>
+  <PortalKey>RjLqVAJJIoj9qDARR01h3SnaGaWGWPutIcWBsTcCEd7vSZ6dca5p6Vo+vKVR1IxoOc7aHCxS4V0XHDi3cGPU9Q==</PortalKey>
+  <StudioVesrion>2.1.2.3</StudioVesrion>
+  <HeadlessMode>N</HeadlessMode>
+  <UseChatbot>N</UseChatbot>
+  <DeployScope>DS001</DeployScope>
+  <Libraries>
+    <System.Activities>System.Activities</System.Activities>
+  </Libraries>
+</Project>
