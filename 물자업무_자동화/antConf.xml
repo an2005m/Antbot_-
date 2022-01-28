@@ -1,9 +1,9 @@
 <Project>
-  <Name>물자업무 자동화_테스트</Name>
-  <Main>Main_01_물품검사매핑.xaml</Main>
-  <Desc>물자업무 자동화_테스트</Desc>
-  <Key>fcGlBheXkYkGMis6Ho9bCnfpqp7EkB5Sa51TEoMATJQb9oQxY8st5SfGXv5wgHmGcZHBjCitvLl2G3MIsrlsBw==</Key>
-  <PortalKey>RjLqVAJJIoj9qDARR01h3SnaGaWGWPutIcWBsTcCEd7vSZ6dca5p6Vo+vKVR1IxoOc7aHCxS4V0XHDi3cGPU9Q==</PortalKey>
+  <Name>물자업무_자동화</Name>
+  <Main>Main_03_신품화.xaml</Main>
+  <Desc>물자업무_자동화</Desc>
+  <Key>iiL795VTrMX69z3dcYVoYrtJUz1PZJvkffIB3zaNnTXpbwDtuQKahS/bX2Z6iu3UZQCixvyT+yf0Xb1hOSrGiQ==</Key>
+  <PortalKey>cLAeVXfI7WeK0GydGrOm0V5P7o6jTqQQg9bRFu1T/EmdbhMxl7lvkj28AFMozSL7IIiMG0XCsp5pnRWipWgZLA==</PortalKey>
   <StudioVesrion>2.1.2.3</StudioVesrion>
   <HeadlessMode>N</HeadlessMode>
   <UseChatbot>N</UseChatbot>

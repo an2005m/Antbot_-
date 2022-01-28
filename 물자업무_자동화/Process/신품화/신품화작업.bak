@@ -66,7 +66,7 @@
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
-      <AssemblyReference>CommonLib</AssemblyReference>
+      <AssemblyReference>CommonLib</AssemblyReference><AssemblyReference>Common.CoreLib</AssemblyReference><AssemblyReference>Common.AuthLib</AssemblyReference>
       <AssemblyReference>WebDriver</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
@@ -144,7 +144,7 @@
                 <Variable x:TypeArguments="ss:SecureString" Name="패스워드" />
               </Sequence.Variables>
               <antbot:LogCodeActivity DisableLog="{x:Null}" DisplayName="로그남기기" sap2010:WorkflowViewState.IdRef="LogCodeActivity_5" logLevel="DEBUG" logMsg="로그인 시작" />
-              <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 아이디,비밀번호 가져오기" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_1" WorkflowPath="Process\자격증명가져오기.xaml">
+              <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow - 아이디,비밀번호 가져오기" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_1" WorkflowPath="Process\신품화\자격증명가져오기.xaml">
                 <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
                   <InArgument x:TypeArguments="x:String" x:Key="in_계정">[in_Config("신품화계정").ToString]</InArgument>
                   <OutArgument x:TypeArguments="x:String" x:Key="Out_UserName">[아이디]</OutArgument>
@@ -264,7 +264,7 @@
     <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
-    <sads:DebugSymbol.Symbol>d1xDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc7Iug7ZKI7ZmUIFdvcmtmbG93KOyCreygnOuyhOyghClcUHJvY2Vzc1zsi6DtkojtmZTsnpHsl4UueGFtbIEBSwOMAg8CAQFOCYgBFAIBaIsBDfEBGAIBGfQBEYECHAIBAlULXBQDAZcBXQtdhgIDAZQBXgtepQEDAZIBXwtmFAMBjgFnC2emAQMBiwFoC3AoAwGDAXELcbIBAwGAAXILeScCAXh6C3qtAQIBdXsLhgEvAgFrhwELhwGmAQIBaZIBD5IBqAECAWaTAQ+ZATgCAV6aAQ+aAXUCAVybAQ+bAasGAgFXnAEPnAGFAgIBVJ0BD50BzwICAVOeAQ+eAc8CAgFSnwEPnwGbAgIBT6ABD6AB0QICAU6hAQ+hAXUCAUyiAQ/vARoCARzwAQ/wAagBAgEa+QET+QF6AgEX+gET+gGpBAIBFfsBE/sBrgECARP8ARP8AccFAgEO/QET/QF5AgEM/gET/gHtBgIBB/8BE/8BeQIBBYACE4ACrwECAQNaNlpUAwGaAVc3Vz8DAZgBXcIBXcwBAwGVAV6ZAV6iAQMBkwFkNmSGAQMBkQFhN2E/AwGPAWeZAWejAQMBjAFpDW8xAwGEAXGaAXGvAQMBgQFyMHJKAgF+dA93GgIBeXqfAXqqAQIBdnutAXu4AQIBc4ABD4QBKwIBbIcBmQGHAaMBAgFqkgGdAZIBpQECAWeTAbQBkwHLAQIBZZcBVZcBWwIBY5YBUJYBVQIBYZUBSJUBZQIBX5oBPpoBSAIBXZsBiwabAagGAgFbmwH7BZsB/gUCAVqbAacCmwGJBAIBWZsB7AWbAfQFAgFYnAH7AZwBggICAVWfAZACnwGYAgIBUKEBPqEBSAIBTaQBE+MBHgIBH+sBF+sBeQIBHfABnQHwAaUBAgEb+QFC+QFMAgEY+gGsAvoBpgQCARb7AaEB+wGrAQIBFPwBrQX8AcQFAgES/AGdBfwBoAUCARH8AacC/AGrAwIBEPwBjgX8AZYFAgEP/QFC/QFMAgEN/gHTBv4B6gYCAQv+AcMG/gHGBgIBCv4BqQL+AdEEAgEJ/gG0Bv4BvAYCAQj/AUL/AUwCAQaAAqIBgAKsAQIBBGlSaVUDAYoBaeACaewCAwGIAWmCH2mIHwMBhwFp9wJp+R4DAYYBaWJpZQMBhQF1EXWBAwIBfHYRdngCAXqAATSAAU8CAXCCAROCAdMCAgFtpQEVrgEeAgFIrwEVrwHHAQIBRbABFc4BIAIBPM8BFc8BxwECATnQARXiATECASDrASjrAUwCAR51rQJ1/gICAX12QHZKAgF7ggFhggFpAgFuqwEbqwFKAgFLpwFBpwFIAgFJrwGjAa8BxAECAUayARm5ASICAUHBAR3KASYCAT3PAaMBzwHEAQIBOtABOtABWQIBN9IBGeABJAIBIbcBRLcBlAECAUS0AUW0AUwCAULHASPHAVICAUDDAUnDAVACAT7TARvXATcCATHYARvcASoCAS/dARvdAdcHAgEq3gEb3gHcAQIBJ98BG98BhQcCASLTAUDTAYcBAgE01QEf1QGSAQIBMtoBR9oBkgECATDdAbcH3QHUBwIBLt0BpwfdAaoHAgEt3QGvAt0BtQUCASzdAZgH3QGgBwIBK94BygHeAdkBAgEp3gG1Ad4BwwECASjfAeUG3wGCBwIBJt8B1QbfAdgGAgEl3wGjAt8B4QQCASTfAcYG3wHOBgIBI9UBMNUBZQIBMw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d3JDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc66y87J6Q7JeF66y0LeyekOuPme2ZlF/thYzsiqTtirhfMDExOV/siJjsoJVcUHJvY2Vzc1zsi6DtkojtmZRc7Iug7ZKI7ZmU7J6R7JeFLnhhbWyBAUsDjAIPAgEBTgmIARQCAWiLAQ3xARgCARn0ARGBAhwCAQJVC1wUAwGXAV0LXYYCAwGUAV4LXqUBAwGSAV8LZhQDAY4BZwtnpgEDAYsBaAtwKAMBgwFxC3GyAQMBgAFyC3knAgF4egt6rQECAXV7C4YBLwIBa4cBC4cBpgECAWmSAQ+SAagBAgFmkwEPmQE4AgFemgEPmgF1AgFcmwEPmwGrBgIBV5wBD5wBhQICAVSdAQ+dAc8CAgFTngEPngHPAgIBUp8BD58BmwICAU+gAQ+gAdECAgFOoQEPoQF1AgFMogEP7wEaAgEc8AEP8AGoAQIBGvkBE/kBegIBF/oBE/oBqQQCARX7ARP7Aa4BAgET/AET/AHHBQIBDv0BE/0BeQIBDP4BE/4B7QYCAQf/ARP/AXkCAQWAAhOAAq8BAgEDWjZaVAMBmgFXN1c/AwGYAV3CAV3MAQMBlQFemQFeogEDAZMBZDZkhgEDAZEBYTdhPwMBjwFnmQFnowEDAYwBaQ1vMQMBhAFxmgFxrwEDAYEBcjBySgIBfnQPdxoCAXl6nwF6qgECAXZ7rQF7uAECAXOAAQ+EASsCAWyHAZkBhwGjAQIBapIBnQGSAaUBAgFnkwG0AZMBzwECAWWXAVWXAVsCAWOWAVCWAVUCAWGVAUiVAWUCAV+aAT6aAUgCAV2bAYsGmwGoBgIBW5sB+wWbAf4FAgFamwGnApsBiQQCAVmbAewFmwH0BQIBWJwB+wGcAYICAgFVnwGQAp8BmAICAVChAT6hAUgCAU2kARPjAR4CAR/rARfrAXkCAR3wAZ0B8AGlAQIBG/kBQvkBTAIBGPoBrAL6AaYEAgEW+wGhAfsBqwECART8Aa0F/AHEBQIBEvwBnQX8AaAFAgER/AGnAvwBqwMCARD8AY4F/AGWBQIBD/0BQv0BTAIBDf4B0wb+AeoGAgEL/gHDBv4BxgYCAQr+AakC/gHRBAIBCf4BtAb+AbwGAgEI/wFC/wFMAgEGgAKiAYACrAECAQRpUmlVAwGKAWngAmnsAgMBiAFpgh9piB8DAYcBafcCafkeAwGGAWliaWUDAYUBdRF1gQMCAXx2EXZ4AgF6gAE0gAFPAgFwggETggHTAgIBbaUBFa4BHgIBSK8BFa8BxwECAUWwARXOASACATzPARXPAccBAgE50AEV4gExAgEg6wEo6wFMAgEeda0Cdf4CAgF9dkB2SgIBe4IBYYIBaQIBbqsBG6sBSgIBS6cBQacBSAIBSa8BowGvAcQBAgFGsgEZuQEiAgFBwQEdygEmAgE9zwGjAc8BxAECATrQATrQAVkCATfSARngASQCASG3AUS3AZQBAgFEtAFFtAFMAgFCxwEjxwFSAgFAwwFJwwFQAgE+0wEb1wE3AgEx2AEb3AEqAgEv3QEb3QHXBwIBKt4BG94B3AECASffARvfAYUHAgEi0wFA0wGHAQIBNNUBH9UBkgECATLaAUfaAZIBAgEw3QG3B90B1AcCAS7dAacH3QGqBwIBLd0BrwLdAbUFAgEs3QGYB90BoAcCASveAcoB3gHZAQIBKd4BtQHeAcMBAgEo3wHlBt8BggcCASbfAdUG3wHYBgIBJd8BowLfAeEEAgEk3wHGBt8BzgYCASPVATDVAWUCATM=</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -360,7 +360,7 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="458,2214" />
       <sap2010:ViewStateData Id="LogCodeActivity_8" sap:VirtualizedContainerService.HintSize="458,92" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="200,50">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="480,3684">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>

@@ -97,11 +97,6 @@
                   </ActivityAction>
                 </antbot:IfThenCodeActivity>
                 <antbot:OpenMsgBoxCodeActivity DisplayName="메세지박스" sap2010:WorkflowViewState.IdRef="OpenMsgBoxCodeActivity_2" MsgBoxButton="YesNo" MsgBoxChosenBtn="[str_보내기여부]" MsgBoxContent="[&quot;모든항목 추가 완료 후 보내기버튼을 클릭할까요?&quot;+Environment.NewLine + &quot;아니오 누를시 추가까지만 하고 끝납니다!&quot;]" MsgBoxIcon="Confirm" MsgBoxTitle="보내기버튼" />
-                <antbot:CommentOut DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-                  <Sequence DisplayName="Ignored Activities">
-                    <antbot:CheckboxWindowCodeActivity InputDictionary="{x:Null}" OutputDictionary="{x:Null}" DisplayName="체크박스 선택창" sap2010:WorkflowViewState.IdRef="CheckboxWindowCodeActivity_2" InputStringArray="[{&quot;예&quot;,&quot;아니요&quot;}]" MainText="보내기 버튼을 클릭할까요?" OutputStringArray="[str_보내기버튼]" Title="보내기 버튼 여부" />
-                  </Sequence>
-                </antbot:CommentOut>
                 <antbot:ExecuteXamlWorkflowCodeActivity DisplayName="실행하기-Workflow" sap2010:WorkflowViewState.IdRef="ExecuteXamlWorkflowCodeActivity_3" WorkflowPath="Process\신품화\신품화작업.xaml">
                   <antbot:ExecuteXamlWorkflowCodeActivity.ChildArguments>
                     <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
@@ -230,7 +225,7 @@
       <Variable x:TypeArguments="s:String[]" Name="str_작업시트목록" />
       <Variable x:TypeArguments="x:String" Name="str_보내기여부" />
     </StateMachine.Variables>
-    <sads:DebugSymbol.Symbol>d2JDOlxVc2Vyc1xVc2VyXERvY3VtZW50c1xBbnRCb3Rc66y87J6Q7JeF66y0LeyekOuPme2ZlF/thYzsiqTtirhfMDExOV/siJjsoJVcTWFpbl8wM1/si6DtkojtmZQueGFtbFk8A+oBEgIBAckBF9ABHwIBdY4BD5kBFwIBbJ4BD9UBFwIBTT4H2QEPAgECywEbywG9AQIBes4BnwHOAbwBAgF3kAETlwEYAgFuoAETxAEeAgFUxwFsxwGJAQIBUdMBkwHTAa0BAgFPQAuJARYCAQmMAWuMAYgBAgEGnAFpnAGDAQIBBMsBqgHLAboBAgF7kAEhkAE+AgFvkgEXkgG3AQIBc5UBF5UBtQECAXGhARXDASACAVVCD3MaAgEUexOFAR4CAQqSAaUBkgG0AQIBdJUBpQGVAbIBAgFyowEZrQEkAgFftQEdvwEoAgFWQxFDxQECAUtEEUsaAgFHTBFTNQIBQlQRWjoCATxbEVuMAwIBNlwRYi0CASpjEWPPAgIBJWQRaCUCASRpEW86AgEccBFwsgECARpxEXHSAQIBF3IRcsUBAgEVfBWDAR4CAQ+EARWEAZwCAgELpAEbpAHIAQIBaqUBG6sBRAIBYqwBG6wByAECAWC2AR+9ASgCAVq+AR++AeABAgFXQ58BQ8IBAgFMST9JSAIBSkZARk0CAUhMrQFM1wECAUZRFVHDAQIBQ1SxAVTMAQIBQVhqWHICAT9XVldkAgE+VlJWaAIBPVvSAVu5AgIBO1uAA1uJAwIBOlvDAlvYAgIBOVvrAlv5AgIBN1w2XFMCATReFWAdAgErY6QBY7EBAgEoY8UCY8wCAgEnY8ABY6MCAgEmaaYBab4BAgEjbVFtXQIBIWtoa3ACAR9sTmxZAgEdcJ8BcK8BAgEbcaABcc8BAgEYcp8BcsIBAgEWgQFDgQFOAgESfkR+UQIBEIQB+AGEAZkCAgEOhAG/AYQB1gECAQykAakBpAHFAQIBa6UBsAGlAcoBAgFpqAFbqAFnAgFnpwFypwF6AgFlqQFYqQFjAgFjrAGpAawBxQECAWG7AU27AVgCAV24AU64AVsCAVu+Aa4BvgHdAQIBWFG4AVHAAQIBRF8XX58DAgEuXlBebQIBLF/YAV+/AgIBM1+TA1+cAwIBMl/JAl/rAgIBMV/+Al+MAwIBLw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d1xDOlxVc2Vyc1xVc2VyXERlc2t0b3BcUlBB7YyM7Yq464SI64+Z67CY7ISx7J6lXOusvOyekOyXheustF/snpDrj5ntmZRcTWFpbl8wM1/si6DtkojtmZQueGFtbFg8A+UBEgIBAcQBF8sBHwIBdIkBD5QBFwIBa5kBD9ABFwIBTD4H1AEPAgECxgEbxgG9AQIBeckBnwHJAbwBAgF2iwETkgEYAgFtmwETvwEeAgFTwgFswgGJAQIBUM4BkwHOAa0BAgFOQAuEARYCAQmHAWuHAYgBAgEGlwFplwGDAQIBBMYBqgHGAboBAgF6iwEhiwE+AgFujQEXjQG3AQIBcpABF5ABtQECAXCcARW+ASACAVRCD24aAgEUdhOAAR4CAQqNAaUBjQG0AQIBc5ABpQGQAbIBAgFxngEZqAEkAgFesAEdugEoAgFVQxFDxQECAUpEEUsaAgFGTBFTNQIBQVQRWjoCATtbEVuMAwIBNVwRYi0CASljEWPPAgIBJGQRajoCARxrEWuyAQIBGmwRbNIBAgEXbRFtxQECARV3FX4eAgEPfxV/nAICAQufARufAcgBAgFpoAEbpgFEAgFhpwEbpwHIAQIBX7EBH7gBKAIBWbkBH7kB4AECAVZDnwFDwgECAUtJP0lIAgFJRkBGTQIBR0ytAUzXAQIBRVEVUcMBAgFCVLEBVMwBAgFAWGpYcgIBPldWV2QCAT1WUlZoAgE8W9IBW7kCAgE6W4ADW4kDAgE5W8MCW9gCAgE4W+sCW/kCAgE2XDZcUwIBM14VYB0CASpjpAFjsQECASdjxQJjzAICASZjwAFjowICASVkpgFkvgECASNoUWhdAgEhZmhmcAIBH2dOZ1kCAR1rnwFrrwECARtsoAFszwECARhtnwFtwgECARZ8Q3xOAgESeUR5UQIBEH/4AX+ZAgIBDn+/AX/WAQIBDJ8BqQGfAcUBAgFqoAGwAaABygECAWijAVujAWcCAWaiAXKiAXoCAWSkAVikAWMCAWKnAakBpwHFAQIBYLYBTbYBWAIBXLMBTrMBWwIBWrkBrgG5Ad0BAgFXUbgBUcABAgFDXxdfnwMCAS1eUF5tAgErX9gBX78CAgEyX5MDX5wDAgExX8kCX+sCAgEwX/4CX4wDAgEu</sads:DebugSymbol.Symbol>
   </StateMachine>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -244,13 +239,11 @@
       <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="464,245" />
       <sap2010:ViewStateData Id="IfThenCodeActivity_2" sap:VirtualizedContainerService.HintSize="480,386" />
       <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_2" sap:VirtualizedContainerService.HintSize="480,60" />
-      <sap2010:ViewStateData Id="CheckboxWindowCodeActivity_2" sap:VirtualizedContainerService.HintSize="480,89" />
-      <sap2010:ViewStateData Id="CommentOut_2" sap:VirtualizedContainerService.HintSize="480,50" />
       <sap2010:ViewStateData Id="ExecuteXamlWorkflowCodeActivity_3" sap:VirtualizedContainerService.HintSize="480,89" />
       <sap2010:ViewStateData Id="LogCodeActivity_8" sap:VirtualizedContainerService.HintSize="480,92" />
       <sap2010:ViewStateData Id="LogCodeActivity_12" sap:VirtualizedContainerService.HintSize="480,92" />
       <sap2010:ViewStateData Id="LogCodeActivity_5" sap:VirtualizedContainerService.HintSize="480,92" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="502,1950">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="502,1860">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -259,22 +252,22 @@
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="OpenMsgBoxCodeActivity_1" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,281">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,284">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="506,20">
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="400,352">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="520,2252" />
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="414,510" />
       <sap2010:ViewStateData Id="LogCodeActivity_2" sap:VirtualizedContainerService.HintSize="273,92" />
       <sap2010:ViewStateData Id="LogCodeActivity_3" sap:VirtualizedContainerService.HintSize="273,92" />
       <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="571,238" />
@@ -318,7 +311,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="404,20">
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="400,20">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -326,8 +319,8 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="418,699" />
-      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="440,823">
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="414,178" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="436,302">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -374,7 +367,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_2" sap:VirtualizedContainerService.HintSize="466,1269">
+      <sap2010:ViewStateData Id="State_2" sap:VirtualizedContainerService.HintSize="462,708">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">100.4,289.3</av:Point>
